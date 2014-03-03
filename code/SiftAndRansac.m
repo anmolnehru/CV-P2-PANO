@@ -1,4 +1,4 @@
-function [matcharr, sift1, sift2] = SiftAndRansac(img1, img2, n)
+function [besthomography, maxinliers] = SiftAndRansac(img1, img2, n, epsilon)
 %UNTITLED Summary of this function goes here
 %   the images are 2 rgb image arrays
 
@@ -28,10 +28,12 @@ end
 
 %Now RANSAC method
 
-k = log(1-bigP) / log(1 - (smallP ^ n));
+k = round(log(1-bigP) / log(1 - (smallP ^ n)));
+display(strcat('The k is ', ' ', num2str(k)));
 
 
-
+besthomography = zeros(3,3);
+maxinliers = 0;
 for i = 1:k
     [points, idx] = datasample(matcharr,n,2); %get n random points
     %these will be 2 x n arrays of the points used for computing the
@@ -43,7 +45,29 @@ for i = 1:k
         secondPoints(:,j) = sift1(1:2, points(2,j));
     end
     homography = ComputeHomography(firstPoints, secondPoints);
+    currinliers = 0;
+    %now iterate through all of matches and find the num of inliers
+    for index = 1:size(matcharr,2)
+        point1 = zeros(3);
+        point1(1:2) = sift1(1:2, matcharr(1, index));
+        point1(3) = 1;
+        
+        point2predicted = homography * point1;
+        
+        point2 = zeros(3);
+        point2(1:2) = sift2(1:2, matcharr(2, index));
+        point2(3) = 1;
+        
+        dist = norm(point2predicted - point2);
+        if (dist < epsilon) 
+            currinliers = currinliers + 1;
+        end
+    end
     
+    if (currinliers > maxinliers)
+        maxinliers = currinliers;
+        besthomography = homography;
+    end
 end
 
 

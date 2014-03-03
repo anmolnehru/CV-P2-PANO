@@ -1,4 +1,4 @@
-function [besthomography, maxinliers] = SiftAndRansac(img1, img2, n, epsilon)
+function [besthomography] = SiftAndRansac(img1, img2, n, epsilon)
 %UNTITLED Summary of this function goes here
 %   the images are 2 rgb image arrays
 

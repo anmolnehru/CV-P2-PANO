@@ -9,13 +9,13 @@ smallP = p;
 gray1 = GetGrayImageFrom3DArray(img1);
 gray2 = GetGrayImageFrom3DArray(img2);
 %the sift arrays will be 4 x featurenum arrays
-sift1 = vl_sift(gray1);
-sift2 = vl_sift(gray2);
+[sift1, d1] = vl_sift(gray1);
+[sift2, d2] = vl_sift(gray2);
 
 %this gives us a 2 x matchnum array where the first row represents column
 %in 1st sift feature array and 2nd row represents its matching column in
 %2nd sift feature array
-matcharr = vl_ubcmatch(sift1, sift2, threshold);
+matcharr = vl_ubcmatch(d1, d2, threshold);
 
 %Now RANSAC method with randomly choosing n on each iteration
 

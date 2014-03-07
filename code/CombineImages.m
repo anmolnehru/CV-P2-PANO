@@ -34,8 +34,36 @@ for i = 1:4
     end
 end
 
-combinedImage = zeros( );
+minRow = round(minRow);
+minCol = round(minCol);
+display(minRow);
+display(minCol);
 
+newNumRows = abs(minRow) + img2rows;
+newNumCols = abs(minCol) + img2cols;
+display(newNumRows);
+display(newNumCols);
+
+%combinedImage = zeros(newNumRows, newNumCols,3);
+combinedImage = zeros(newNumCols, newNumRows,3);
+tmp = minCol;
+minCol = minRow;
+minRow = tmp;
+
+for i = 1:img1rows
+    for j = 1:img1cols
+        currPoint = img1(i,j,:);
+        warpedPixel = h * [i j 1]';
+        combinedImage(round(warpedPixel(1)) + abs(minRow) + 1, round(warpedPixel(2)) + abs(minCol) + 1, :) = currPoint;
+    end
+end
+
+for i = 1:img2rows
+    for j = 1:img2cols
+        currPoint = img2(i,j,:);
+        combinedImage(currPoint(1) + abs(minRow), currPoint(2) + abs(minCol), :) = currPoint;
+    end
+end
 
 end
 

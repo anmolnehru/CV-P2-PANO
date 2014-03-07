@@ -20,6 +20,7 @@ gray2 = GetGrayImageFrom3DArray(img2);
 %in 1st sift feature array and 2nd row represents its matching column in
 %2nd sift feature array
 matcharr = vl_ubcmatch(d1, d2, threshold);
+display(matcharr);
 
 display(strcat('Number of matches: ', num2str(size(matcharr,2))));
 

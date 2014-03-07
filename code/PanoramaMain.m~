@@ -121,13 +121,16 @@ function [matches] = PanoramaMain(inDir, f)
             saveas(handle,strcat(outDir,'/switch_',num2str(ii),'.jpg'));
 
         end
-               
+        
+        
+    
+        
     end
         
     
     
-    stitchedImg = CreateStitchedImage(pixArray);
-    imshow(stitchedImg);
+%     stitchedImg = CreateStitchedImage(pixArray);
+%     imshow(stitchedImg);
     %CreateStitchedImage(pixArray, outDir);
 
     

@@ -1,6 +1,8 @@
 function [ combinedImage ] = CombineImages(img1, img2, h)
 %UNTITLED2 Summary of this function goes here
-%   Detailed explanation goes here
+%
+%   The order of the images should be the same as the SiftAndRansac
+%   function
 
 minRow = 99999999;
 maxRow = 0;
@@ -34,9 +36,44 @@ for i = 1:4
     end
 end
 
+minRow = round(minRow);
+minCol = round(minCol);
+tmp = minCol;
+minCol = minRow;
+minRow = tmp;
+display(strcat('The min row is:', num2str(minRow)));
+display(strcat('The min col is:', num2str(minCol)));
+display(strcat('The max row is:', num2str(maxRow)));
+display(strcat('The max col is:', num2str(maxCol)));
 
-combinedImage = zeros( );
+newNumRows = abs(minRow) + img2rows;
+newNumCols = abs(minCol) + img2cols;
+display(strcat('The new num rows is:', num2str(newNumRows)));
+display(strcat('The new num cols is:', num2str(newNumCols)));
 
+combinedImage = zeros(newNumRows, newNumCols,3);
+
+for i = 1:img1rows
+    for j = 1:img1cols
+        currPoint = img1(i,j,:);
+        warpedPixel = h * [i j 1]';
+        warpedPixel = round(warpedPixel);
+        
+        if (warpedPixel(1) + 1 > abs(minCol))
+        else
+        end
+        combinedImage(warpedPixel(1) + abs(minCol) + 1, warpedPixel(2) + abs(minRow) + 1, :) = currPoint;
+    end
+end
+
+for i = 1:img2rows
+    for j = 1:img2cols
+        currPoint = img2(i,j,:);
+        combinedImage(i + abs(minRow), j + abs(minCol), :) = currPoint;
+    end
+end
+
+combinedImage = uint8(combinedImage);
 
 end
 

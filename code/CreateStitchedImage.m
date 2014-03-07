@@ -14,10 +14,10 @@ imgcols = size(pixarray,3);
 
 mkdir(outDir);
 
-panorama = reshape(pixarray(1,:,:,:),imgrows,imgcols,3);
+panorama = cropImg(reshape(pixarray(1,:,:,:),imgrows,imgcols,3));
 
 for i = 2:size(pixarray,1)
-    currimg = reshape(pixarray(i,:,:,:),imgrows,imgcols,3);
+    currimg = cropImg(reshape(pixarray(i,:,:,:),imgrows,imgcols,3));
     if (direction == 1)
        % h = SiftAndRansacRandomEpsAndN(panorama, currimg, smallP);
         h = SiftAndRansac(panorama, currimg, n, epsilon, smallP);

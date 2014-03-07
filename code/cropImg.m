@@ -12,7 +12,7 @@ function [ outImg ] = cropImg( inImg )
            end
         end
         if(notBlack==0)
-           leftMargin=c+1     
+           leftMargin=c+1;   
         else
            break;
         end        
@@ -26,7 +26,7 @@ function [ outImg ] = cropImg( inImg )
            end
         end
         if(notBlack==0)
-           rightMargin=c-1     
+           rightMargin=c-1;  
         else
            break;
         end        

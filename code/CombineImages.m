@@ -43,19 +43,32 @@ minCol = minRow;
 minRow = tmp;
 display(strcat('The min row is:', num2str(minRow)));
 display(strcat('The min col is:', num2str(minCol)));
+display(strcat('The max row is:', num2str(maxRow)));
+display(strcat('The max col is:', num2str(maxCol)));
 
 newNumRows = abs(minRow) + img2rows;
 newNumCols = abs(minCol) + img2cols;
-(strcat('The new num rows is:', num2str(newNumRows)));
-(strcat('The new num cols is:', num2str(newNumCols)));
+display(strcat('The new num rows is:', num2str(newNumRows)));
+display(strcat('The new num cols is:', num2str(newNumCols)));
 
 combinedImage = zeros(newNumRows, newNumCols,3);
 
 for i = 1:img1rows
     for j = 1:img1cols
         currPoint = img1(i,j,:);
+        if (isequal(currPoint, zeros(1,1,3)))
+            display('black pixel found');
+            continue;
+        end
         warpedPixel = h * [i j 1]';
-        combinedImage(round(warpedPixel(1)) + abs(minCol) + 1, round(warpedPixel(2)) + abs(minRow) + 1, :) = currPoint;
+        warpedPixel = round(warpedPixel);
+        
+        if (warpedPixel(2) + 1 > abs(minRow))
+            currPoint = currPoint * (maxCols - warpedPixel(2) + 1) / maxCols;
+            combinedImage(warpedPixel(1) + abs(minCol) + 1, warpedPixel(2) + abs(minRow) + 1, :) = currPoint;
+        else
+            combinedImage(warpedPixel(1) + abs(minCol) + 1, warpedPixel(2) + abs(minRow) + 1, :) = currPoint;
+        end
     end
 end
 

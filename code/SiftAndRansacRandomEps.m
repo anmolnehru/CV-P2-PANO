@@ -2,6 +2,8 @@ function [besthomography] = SiftAndRansacRandomEps(img1, img2, n, p)
 %  Improve RANSAC by randomly trying different epsilons on each iteration
 %  and taking ratio of numInliers / epsilonSize to choose best
 %   the images are 2 rgb image arrays
+%   the first image entered should be on the right with respect to the next
+%   image
 
 threshold = 1.5; %default threshold
 bigP = 0.99;

@@ -1,6 +1,8 @@
 function [besthomography] = SiftAndRansac(img1, img2, n, epsilon, p)
 %UNTITLED Summary of this function goes here
 %   the images are 2 rgb image arrays
+%   the first image entered should be on the right with respect to the next
+%   image
 
 threshold = 1.5; %default threshold
 bigP = 0.99;
@@ -20,7 +22,6 @@ gray2 = GetGrayImageFrom3DArray(img2);
 %in 1st sift feature array and 2nd row represents its matching column in
 %2nd sift feature array
 matcharr = vl_ubcmatch(d1, d2, threshold);
-display(matcharr);
 
 display(strcat('Number of matches: ', num2str(size(matcharr,2))));
 

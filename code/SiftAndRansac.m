@@ -13,13 +13,13 @@ end
 gray1 = GetGrayImageFrom3DArray(img1);
 gray2 = GetGrayImageFrom3DArray(img2);
 %the sift arrays will be 4 x featurenum arrays
-sift1 = vl_sift(gray1);
-sift2 = vl_sift(gray2);
+[sift1, d1] = vl_sift(gray1);
+[sift2, d2] = vl_sift(gray2);
 
 %this gives us a 2 x matchnum array where the first row represents column
 %in 1st sift feature array and 2nd row represents its matching column in
 %2nd sift feature array
-matcharr = vl_ubcmatch(sift1, sift2, threshold);
+matcharr = vl_ubcmatch(d1, d2, threshold);
 
 display(strcat('Number of matches: ', num2str(size(matcharr,2))));
 
@@ -47,8 +47,8 @@ for i = 1:k
         firstPoints(:,j) = sift1(1:2, points(1,j));
         secondPoints(:,j) = sift2(1:2, points(2,j));
     end
-    display(firstPoints);
-    display(secondPoints);
+%     display(firstPoints);
+%     display(secondPoints);
     homography = ComputeHomography(firstPoints, secondPoints);
     clear inlierpoints1;
     clear inlierpoints2;

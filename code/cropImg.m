@@ -31,9 +31,8 @@ function [ outImg ] = cropImg( inImg )
            break;
         end        
     end
-    
-    imshow(inImg);
-    outImg = imcrop(inImg,[ leftMargin topMargin  rightMargin bottomMargin]);
-    imshow(outImg);
+
+     outImg = imcrop(inImg,[ leftMargin topMargin  rightMargin bottomMargin]);
+     
 end
 

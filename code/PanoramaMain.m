@@ -1,9 +1,8 @@
-function [finalimg] = PanoramaMain(inDir)
+function [finalimg] = PanoramaMain(inDir, f)
 
     pointsToSample = 4;
     epsilon = 10;
-    f=660;
-
+    %f=660;
     %startup;
     warning('off','all');
     outDir=strcat(inDir,'PANO_',datestr(now,'mmddyyyy_HHMMSSFFF'));

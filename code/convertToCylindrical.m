@@ -36,11 +36,6 @@ for i = 1:rows
     end
 end
 
-% display(maxtheta);
-% display(mintheta);
-% display(maxh);
-% display(minh);
-
 convertedImage = zeros(round(maxh),round(maxtheta),3);
 
 for i = 1:rows

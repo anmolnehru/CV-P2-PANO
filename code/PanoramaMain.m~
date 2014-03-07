@@ -2,27 +2,28 @@ function [finalimg] = PanoramaMain(inDir)
 
     pointsToSample = 4;
     epsilon = 10;
-
+    f=660;
     %startup;
     warning('off','all');
     outDir=strcat(inDir,'PANO_',datestr(now,'mmddyyyy_HHMMSSFFF'));
     mkdir(outDir);
     display(strcat(datestr(now,'HH:MM:SS'),' [INFO] ', ...
         ' Output dir created at ',outDir));
-
-    
-    
-    srcFiles = dir(strcat(outDir,'*'));  
-    display(srcFiles);
+  
+    srcFiles = dir(strcat(inDir,'*.*'));  
     for i = 1 : length(srcFiles)
-        if srcFiles(i)
-        filename = strcat(srcFiles(i).name);
-        I = imread(filename);
-        
-        %do stuff to I
-        
-        figure, imshow(I);
-        imwrite(I,strcat(outDir,'cy_',filename));
+        if (srcFiles(i).isdir~=1)
+            inFilename = strcat(inDir,srcFiles(i).name);            
+            display(strcat(datestr(now,'HH:MM:SS'),' [INFO] ', ...
+                ' Processing file ',inFilename));            
+            I = imread(inFilename);            
+            NewI = convertToCylindrical(I,f);
+            %figure, imshow(NewI);
+            outFilename=strcat(outDir,'/cy_',srcFiles(i).name);                       
+            display(strcat(datestr(now,'HH:MM:SS'),' [INFO] ', ...
+                ' Creating file ',outFilename));  
+            imwrite(NewI,outFilename);
+        end
     end
     
 
@@ -39,4 +40,3 @@ function [finalimg] = PanoramaMain(inDir)
 % % %     warped_img1 = imwarp(img1,tform);
 
 end
-

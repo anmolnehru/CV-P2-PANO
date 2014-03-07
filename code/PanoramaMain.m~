@@ -92,7 +92,7 @@ function [matches] = PanoramaMain(inDir, f)
     
     
     
-    [matches, scores] = vl_ubcmatch(d, d2, 2.5) ;
+    [matches, scores] = vl_ubcmatch(d, d2) ;
     
     
     
@@ -168,9 +168,7 @@ function [matches] = PanoramaMain(inDir, f)
         p1 = [fx1,fx2];
         p2 = [fy1,fy2];
 
-        %plot([p1(2),p2(2)],[p1(1),p2(1)],'Color','r','LineWidth',1);
-        
-        line(p1,p2,'Color','r','LineWidth',1);
+        plot([p1(2),p2(2)],[p1(1),p2(1)],'Color','r','LineWidth',1)
 
         
         %display(strcat('d1=',num2str(d(i1)),' - i1=',num2str(i1),' --- d2=',num2str(d2(i2)),' - i2=',num2str(i2)));

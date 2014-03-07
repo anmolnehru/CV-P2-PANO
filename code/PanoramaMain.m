@@ -57,6 +57,9 @@ function [matches] = PanoramaMain(inDir, f)
         figure
         imshow(myImg);
     end
+    
+    stitchedImg = CreateStitchedImage(pixArray);
+    imshow(stitchedImg);
         
     srgStartup;
     figure

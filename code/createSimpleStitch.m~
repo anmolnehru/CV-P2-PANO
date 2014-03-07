@@ -1,0 +1,78 @@
+function [ outImg ] = createSimpleStitch( pixArray, outDir )
+
+    for r=1:size(pixArray,2)
+        for c=1:size(pixArray,3)
+            I1(r,c,1)=pixArray(1,r,c,1);
+            I1(r,c,2)=pixArray(1,r,c,2);
+            I1(r,c,3)=pixArray(1,r,c,3);
+        end
+    end
+    
+    
+    MAX_OVERLAP=size(I1,1)/2;
+    
+    for ii=2: size(pixArray,1)
+
+        clear I2;
+        clear I1_ori;
+        clear I2_ori;
+        clear f;
+        clear f2;
+        clear d;
+        clear d2;
+        clear fx1;
+        clear fx2;
+        clear dx1;
+        clear dx2;
+        clear img2;
+
+        for r=1:size(pixArray,2)
+            for c=1:size(pixArray,3)
+                I2(r,c,1)=pixArray(ii,r,c,1);
+                I2(r,c,2)=pixArray(ii,r,c,2);
+                I2(r,c,3)=pixArray(ii,r,c,3);
+            end
+        end
+        
+        %images are already cropped
+        I1_ori=I1;
+        I2_ori=I2;      
+
+        I1 = single(rgb2gray(I1)) ;
+        [f,d] = vl_sift(I1) ;
+        I2 = single(rgb2gray(I2)) ;
+        [f2,d2] = vl_sift(I2) ;
+
+        [matches, scores] = vl_ubcmatch(d, d2, 2.5) ;        
+                      
+        clear fx1;
+        clear fx2;
+        clear fy1;
+        clear fy2;
+        
+        matches
+
+        for i=1:size(matches,2)
+            i1=matches(1,i);
+            i2=matches(2,i);
+            fx1(i)=f(1,i1);
+            fx2(i)=f2(1,i2);
+            fy1(i)=f(2,i1);
+            fy2(i)=f2(2,i2);
+        end
+        
+        display(fx1);
+        display(fx2);
+        display(fy1);
+        display(fy2);
+        
+        clear I1;
+        I1=I2_ori;
+        
+    end     
+
+
+
+
+end
+

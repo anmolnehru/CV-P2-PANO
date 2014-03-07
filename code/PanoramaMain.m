@@ -9,7 +9,7 @@ function [] = PanoramaMain(inDir, f)
     %DO_PRINT_IMG=1;
     DO_PRINT_IMG=0;
     startup;
-    %srgStartup;
+    srgStartup;
     warning('off','all');
     outDir=strcat(inDir,'PANO_',datestr(now,'mmddyyyy_HHMMSSFFF'));
     mkdir(outDir);

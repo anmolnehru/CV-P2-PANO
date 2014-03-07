@@ -1,9 +1,12 @@
-function [matches] = PanoramaMain(inDir, f)
+function [] = PanoramaMain(inDir, f)
     
-    pointsToSample = 4;
-    epsilon = 10;
+    %pointsToSample = 4;
+    %epsilon = 10;
     %f=660;
     DO_FLAG=1;
+    DO_FLAG=0;
+    DO_PRINT_IMG=1;
+    %DO_PRINT_IMG=0;
     startup;
     srgStartup;
     warning('off','all');
@@ -32,10 +35,12 @@ function [matches] = PanoramaMain(inDir, f)
                 end
             end            
             
-            display(strcat(datestr(now,'HH:MM:SS'),' [INFO] ', ...
-                ' Creating file>',outFilename));  
-            NewI=cropImg(NewI);
-            imwrite(NewI,outFilename);
+            if(DO_PRINT_IMG==1)                       
+                display(strcat(datestr(now,'HH:MM:SS'),' [INFO] ', ...
+                    ' Creating file>',outFilename));  
+                NewI=cropImg(NewI);
+                imwrite(NewI,outFilename);
+            end
         end
     end    
     
@@ -116,66 +121,14 @@ function [matches] = PanoramaMain(inDir, f)
                 p2 = [fy1,fy2];
                 line(p1,p2,'Color','r','LineWidth',1);
             end
-
             hold off
-            saveas(handle,strcat(outDir,'/switch_',num2str(ii),'.jpg'));
-
-        end
-               
-    end
-        
+            if(DO_PRINT_IMG==1)
+                saveas(handle,strcat(outDir,'/switch_',num2str(ii),'.jpg'));
+            end
+        end               
+    end   
     
-    
-    stitchedImg = CreateStitchedImage(pixArray);
+    stitchedImg = CreateStitchedImage(pixArray,outDir);
     imshow(stitchedImg);
-    %CreateStitchedImage(pixArray, outDir);
-
     
-    %display(matches);
-    %display(scores);
-    
-% % % % % %     figure
-% % % % % %     
-% % % % % %     I2 = single(rgb2gray(I2)) ;
-% % % % % %     [f2,d2] = vl_sift(I2) ;
-% % % % % %     
-% % % % % %     perm2 = randperm(size(f2,2)) ;
-% % % % % %     
-% % % % % %     display(perm2);
-% % % % % %     sel2 = perm2(1:50) ;
-% % % % % %     display(sel2);
-% % % % % %     
-% % % % % %     h4 = vl_plotframe(f2(:,sel2)) ;
-% % % % % %     h5 = vl_plotframe(f2(:,sel2)) ;
-% % % % % %     
-% % % % % %     set(h4,'color','k','linewidth',3) ;
-% % % % % %     set(h5,'color','y','linewidth',2) ;
-% % % % % %     
-% % % % % %     h6 = vl_plotsiftdescriptor(d2(:,sel2),f2(:,sel2)) ;
-% % % % % %     set(h6,'color','g') ;
-    
-    
-% % % %     gray1 = GetGrayImageFrom3DArray(I1);
-% % % %     gray2 = GetGrayImageFrom3DArray(I2);
-% % % %     imshow(uint8(gray1));
-% % % %     figure;
-% % % %     imshow(uint8(gray2));
-% % % %     
-% % % %     %the sift arrays will be 4 x featurenum arrays
-% % % %     sift1 = vl_sift(gray1);
-% % % %     sift2 = vl_sift(gray2);
-% % % %     
-% % % %     
-% % % %     matcharr = vl_ubcmatch(sift1, sift2, threshold);
-
-    
-% % % 
-% % %     %TODO: run SiftAndRansac with various pointsToSample and epsilons and
-% % %     %choose the best homography matrix based on its determinant etc.
-% % % 
-% % %     homography = SiftAndRansac(img1, img2, pointsToSample, epsilon);
-% % % 
-% % %     tform = projective2d(h2);
-% % %     warped_img1 = imwarp(img1,tform);
-
 end

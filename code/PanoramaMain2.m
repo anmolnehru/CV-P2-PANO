@@ -4,6 +4,9 @@ function [matches] = PanoramaMain(inDir, f)
     epsilon = 10;
     %f=660;
     DO_FLAG=1;
+    DO_FLAG=0;
+    DO_PRINT_IMG=1;
+    %DO_PRINT_IMG=0;
     startup;
     srgStartup;
     warning('off','all');
@@ -32,10 +35,13 @@ function [matches] = PanoramaMain(inDir, f)
                 end
             end            
             
-            display(strcat(datestr(now,'HH:MM:SS'),' [INFO] ', ...
-                ' Creating file>',outFilename));  
-            NewI=cropImg(NewI);
-            imwrite(NewI,outFilename);
+            if(DO_PRINT_IMG==1)        
+                
+                display(strcat(datestr(now,'HH:MM:SS'),' [INFO] ', ...
+                    ' Creating file>',outFilename));  
+                NewI=cropImg(NewI);
+                imwrite(NewI,outFilename);
+            end
         end
     end    
     
@@ -118,19 +124,18 @@ function [matches] = PanoramaMain(inDir, f)
             end
 
             hold off
-            saveas(handle,strcat(outDir,'/switch_',num2str(ii),'.jpg'));
-
+            
+            if(DO_PRINT_IMG==1)
+                saveas(handle,strcat(outDir,'/switch_',num2str(ii),'.jpg'));
+            end
         end
-        
-        
-    
-        
+               
     end
         
     
     
-%     stitchedImg = CreateStitchedImage(pixArray);
-%     imshow(stitchedImg);
+    stitchedImg = CreateStitchedImage(pixArray,outDir);
+    imshow(stitchedImg);
     %CreateStitchedImage(pixArray, outDir);
 
     

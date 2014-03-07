@@ -16,7 +16,6 @@ for i = 1:rows
     for j = 1:columns
         theta = atan((j - columns/2)/f);
         h = (i - rows/2) / sqrt((j - columns/2)^2 + f^2);
-        %xhat = j /
 
         cylindricalImage(i,j,1) = theta; 
         cylindricalImage(i,j,2) = h;

@@ -1,14 +1,10 @@
-function [besthomography] = SiftAndRansac(img1, img2, n, epsilon)
+function [besthomography] = SiftAndRansacRandomN(img1, img2, epsilon)
 %UNTITLED Summary of this function goes here
 %   the images are 2 rgb image arrays
 
 threshold = 1.5; %default threshold
 bigP = 0.99;
 smallP = 0.2;
-
-if (n < 4)
-    n = 4;
-end
 
 gray1 = GetGrayImageFrom3DArray(img1);
 gray2 = GetGrayImageFrom3DArray(img2);
@@ -21,20 +17,13 @@ sift2 = vl_sift(gray2);
 %2nd sift feature array
 matcharr = vl_ubcmatch(sift1, sift2, threshold);
 
-if (n > size(matcharr,2))
-    display('n is larger than the number of feature matches, please try again');
-    return;
-end
-
-%Now RANSAC method
-
-k = round(log(1-bigP) / log(1 - (smallP ^ n)));
-display(strcat('The k is ', ' ', num2str(k)));
-
+%Now RANSAC method with randomly choosing n on each iteration
 
 besthomography = zeros(3,3);
 maxinliers = 0;
-for i = 1:k
+k = 0;
+while k < 1
+    n = round(rand(1) * 15) + 3;
     [points, idx] = datasample(matcharr,n,2); %get n random points
     %these will be 2 x n arrays of the points used for computing the
     %homography matrix
@@ -68,9 +57,10 @@ for i = 1:k
         maxinliers = currinliers;
         besthomography = homography;
     end
+    k = k + 1/ round(log(1-bigP) / log(1 - (smallP ^ n)));
 end
-display(strcat('The maximum number of inliers are ', num2str(maxinliers)));
 
+display(strcat('The maximum number of inliers are ', num2str(maxinliers)));
 
 end
 

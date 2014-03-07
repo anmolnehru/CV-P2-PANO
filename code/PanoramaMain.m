@@ -5,6 +5,8 @@ function [finalimg] = PanoramaMain(directory)
 pointsToSample = 4;
 epsilon = 10;
 
+startup;
+
 %TODO: first read in 2 images from directory
 img1;
 img2;

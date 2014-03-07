@@ -1,5 +1,6 @@
-function [besthomography] = SiftAndRansac(img1, img2, n, epsilon)
-%UNTITLED Summary of this function goes here
+function [besthomography] = SiftAndRansacRandomEps(img1, img2, n)
+%  Improve RANSAC by randomly trying different epsilons on each iteration
+%  and taking ratio of numInliers / epsilonSize to choose best
 %   the images are 2 rgb image arrays
 
 threshold = 1.5; %default threshold
@@ -26,7 +27,7 @@ if (n > size(matcharr,2))
     return;
 end
 
-%Now RANSAC method
+%Now RANSAC method where epsilon is randomly chosen on each iteration
 
 k = round(log(1-bigP) / log(1 - (smallP ^ n)));
 display(strcat('The k is ', ' ', num2str(k)));
@@ -35,6 +36,7 @@ display(strcat('The k is ', ' ', num2str(k)));
 besthomography = zeros(3,3);
 maxinliers = 0;
 for i = 1:k
+    epsilon = rand(1)*19 + 1;
     [points, idx] = datasample(matcharr,n,2); %get n random points
     %these will be 2 x n arrays of the points used for computing the
     %homography matrix
@@ -63,13 +65,14 @@ for i = 1:k
             currinliers = currinliers + 1;
         end
     end
+    currinliers = currinliers / epsilon;
     
     if (currinliers > maxinliers)
         maxinliers = currinliers;
         besthomography = homography;
     end
 end
-display(strcat('The maximum number of inliers are ', num2str(maxinliers)));
+display(strcat('The maximum inlier ratio is ', num2str(maxinliers)));
 
 
 end

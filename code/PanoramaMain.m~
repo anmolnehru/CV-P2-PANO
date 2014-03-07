@@ -130,9 +130,9 @@ function [] = PanoramaMain(inDir, f)
     end   
     
     simpleStitchedImg=createSimpleStitch(pixArray,outDir);
-    imshow(simpleStitchedImg);
+    imshow
     
-%     stitchedImg = CreateStitchedImage(pixArray,outDir);
-%     imshow(stitchedImg);
+    stitchedImg = CreateStitchedImage(pixArray,outDir);
+    imshow(stitchedImg);
     
 end

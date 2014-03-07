@@ -15,21 +15,19 @@ function [finalimg] = PanoramaMain(inDir, f)
         if (srcFiles(i).isdir~=1)
             inFilename = strcat(inDir,srcFiles(i).name);            
             display(strcat(datestr(now,'HH:MM:SS'),' [INFO] ', ...
-                ' Processing file ',inFilename));            
+                ' Processing file>',inFilename));            
             I = imread(inFilename);            
             NewI = convertToCylindrical(I,f);
-            %figure, imshow(NewI);
-            outFilename=strcat(outDir,'/cy_',srcFiles(i).name);                       
+            outFilename=strcat(outDir,'/cy_',srcFiles(i).name);  
+            
+            
+            
             display(strcat(datestr(now,'HH:MM:SS'),' [INFO] ', ...
-                ' Creating file ',outFilename));  
+                ' Creating file>',outFilename));  
             imwrite(NewI,outFilename);
         end
     end
     
-
-% % %     %TODO: first read in 2 images from directory
-% % %     img1;
-% % %     img2;
 % % % 
 % % %     %TODO: run SiftAndRansac with various pointsToSample and epsilons and
 % % %     %choose the best homography matrix based on its determinant etc.

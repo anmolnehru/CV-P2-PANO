@@ -57,14 +57,13 @@ for i = 1:img1rows
     for j = 1:img1cols
         currPoint = img1(i,j,:);
         if (isequal(currPoint, zeros(1,1,3)))
-            %display('black pixel found');
             continue;
         end
         warpedPixel = h * [i j 1]';
         warpedPixel = round(warpedPixel);
         
         if (warpedPixel(2) + 1 > abs(minRow))
-            currPoint = currPoint * (maxCol - warpedPixel(2) + 1) / maxCol;
+            %currPoint = currPoint * (maxCol - warpedPixel(2) + 1) / maxCol;
             combinedImage(warpedPixel(1) + abs(minCol) + 1, warpedPixel(2) + abs(minRow) + 1, :) = currPoint;
         else
             combinedImage(warpedPixel(1) + abs(minCol) + 1, warpedPixel(2) + abs(minRow) + 1, :) = currPoint;
@@ -75,6 +74,9 @@ end
 for i = 1:img2rows
     for j = 1:img2cols
         currPoint = img2(i,j,:);
+        if (isequal(currPoint, zeros(1,1,3)))
+            continue;
+        end
         if (j < maxCol)
             %currPoint = 
             combinedImage(i + abs(minRow), j + abs(minCol), :) = currPoint;

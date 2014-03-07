@@ -41,15 +41,15 @@ minCol = round(minCol);
 tmp = minCol;
 minCol = minRow;
 minRow = tmp;
-display(strcat('The min row is:', num2str(minRow)));
-display(strcat('The min col is:', num2str(minCol)));
-display(strcat('The max row is:', num2str(maxRow)));
-display(strcat('The max col is:', num2str(maxCol)));
+% display(strcat('The min row is:', num2str(minRow)));
+% display(strcat('The min col is:', num2str(minCol)));
+% display(strcat('The max row is:', num2str(maxRow)));
+% display(strcat('The max col is:', num2str(maxCol)));
 
 newNumRows = abs(minRow) + img2rows;
 newNumCols = abs(minCol) + img2cols;
-display(strcat('The new num rows is:', num2str(newNumRows)));
-display(strcat('The new num cols is:', num2str(newNumCols)));
+% display(strcat('The new num rows is:', num2str(newNumRows)));
+% display(strcat('The new num cols is:', num2str(newNumCols)));
 
 combinedImage = zeros(newNumRows, newNumCols,3);
 
@@ -63,7 +63,10 @@ for i = 1:img1rows
         warpedPixel = round(warpedPixel);
         
         if (warpedPixel(2) + 1 > abs(minRow))
-            %currPoint = currPoint * (maxCol - warpedPixel(2) + 1) / maxCol;
+            %display(num2str(double((maxCol - warpedPixel(2) + 1)) / double(maxCol)));
+            currPoint = double(currPoint) * double((maxCol - warpedPixel(2) + 1)) / double(maxCol);
+            currPoint = uint8(currPoint);
+            %display(currPoint);
             combinedImage(warpedPixel(1) + abs(minCol) + 1, warpedPixel(2) + abs(minRow) + 1, :) = currPoint;
         else
             combinedImage(warpedPixel(1) + abs(minCol) + 1, warpedPixel(2) + abs(minRow) + 1, :) = currPoint;
@@ -78,13 +81,23 @@ for i = 1:img2rows
             continue;
         end
         if (j < maxCol)
-            %currPoint = 
+            %currPoint = currPoint * 
             combinedImage(i + abs(minRow), j + abs(minCol), :) = currPoint;
         else
             combinedImage(i + abs(minRow), j + abs(minCol), :) = currPoint;
         end
     end
 end
+
+% for i = 1:newNumRows
+%     for j = 1:newNumCols
+%         if (isequal(combinedImage(i,j,:),zeros(1,1,3)))
+%             combinedImage(i,j,:) = (combinedImage(min(newNumRows,i + 1),j,:) + ...
+%                 combinedImage(max(1, i - 1),j,:) + combinedImage(i,min(newNumCols,j + 1),:) + ...
+%                 combinedImage(i,max(1, j - 1),:)) / 4;
+%         end
+%     end
+% end
 
 combinedImage = uint8(combinedImage);
 

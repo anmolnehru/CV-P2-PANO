@@ -6,7 +6,7 @@ function [] = PanoramaMain(inDir, f)
     DO_FLAG=1;
     DO_FLAG=0;
     DO_PRINT_IMG=1;
-    %DO_PRINT_IMG=0;
+    DO_PRINT_IMG=0;
     startup;
     srgStartup;
     warning('off','all');

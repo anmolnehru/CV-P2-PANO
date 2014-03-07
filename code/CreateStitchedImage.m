@@ -7,7 +7,7 @@ function [ panorama ] = CreateStitchedImage(pixarray, outDir)
 n = 4;
 epsilon = 5;
 smallP = 0.5;
-direction = 2;
+direction = 1;
 
 imgrows = size(pixarray,2);
 imgcols = size(pixarray,3);

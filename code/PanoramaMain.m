@@ -22,11 +22,11 @@ function [matches] = PanoramaMain(inDir, f)
             NewI = convertToCylindrical(I,f);
             outFilename=strcat(outDir,'/cy_',srcFiles(i).name);  
             
-            if(count==1)
+            if(count==3)
                 I1=NewI;
             end
             
-            if(count==2)
+            if(count==4)
                 I2=NewI;
             end
             
@@ -39,10 +39,13 @@ function [matches] = PanoramaMain(inDir, f)
     
     srgStartup;
     figure
+    
+    imshow(uint8(I1));
+    
     I1 = single(rgb2gray(I1)) ;
     [f,d] = vl_sift(I1) ;
     
-    imshow(uint8(I1));
+    %imshow(uint8(I1));
     
     hold on
     

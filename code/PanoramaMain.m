@@ -1,9 +1,9 @@
 function [matches] = PanoramaMain(inDir, f)
-
+    
     pointsToSample = 4;
     epsilon = 10;
     %f=660;
-    %startup;
+    startup;
     warning('off','all');
     outDir=strcat(inDir,'PANO_',datestr(now,'mmddyyyy_HHMMSSFFF'));
     mkdir(outDir);
@@ -54,13 +54,14 @@ function [matches] = PanoramaMain(inDir, f)
                 myImg(r,c,3)=pixArray(i,r,c,3);
             end
         end
-        figure
-        imshow(myImg);
+        %figure
+%         imshow(myImg);
     end
     
-    stitchedImg = CreateStitchedImage(pixArray);
-    imshow(stitchedImg);
-        
+%     stitchedImg = CreateStitchedImage(pixArray);
+%     imshow(stitchedImg);
+    CreateStitchedImage(pixArray, outDir);
+
     srgStartup;
     figure
     

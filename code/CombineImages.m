@@ -41,13 +41,13 @@ minCol = round(minCol);
 tmp = minCol;
 minCol = minRow;
 minRow = tmp;
-display(minRow);
-display(minCol);
+display(strcat('The min row is:', num2str(minRow)));
+display(strcat('The min col is:', num2str(minCol)));
 
 newNumRows = abs(minRow) + img2rows;
 newNumCols = abs(minCol) + img2cols;
-display(newNumRows);
-display(newNumCols);
+(strcat('The new num rows is:', num2str(newNumRows)));
+(strcat('The new num cols is:', num2str(newNumCols)));
 
 combinedImage = zeros(newNumRows, newNumCols,3);
 

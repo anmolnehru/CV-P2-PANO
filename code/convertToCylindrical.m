@@ -1,6 +1,4 @@
 function [ convertedImage ] = convertToCylindrical(image, f)
-%UNTITLED Summary of this function goes here
-%   Takes in 3 dimensional image
 
 rows = size(image,1);
 columns = size(image,2);

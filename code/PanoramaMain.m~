@@ -11,6 +11,7 @@ function [matches] = PanoramaMain(inDir, f)
         ' Output dir created at ',outDir));
     
     srcFiles = dir(strcat(inDir,'*.*')); 
+    pixArray
     count=0;
     for i = 1 : length(srcFiles)
         if (srcFiles(i).isdir~=1)
@@ -22,14 +23,6 @@ function [matches] = PanoramaMain(inDir, f)
             NewI = convertToCylindrical(I,f);
             outFilename=strcat(outDir,'/cy_',srcFiles(i).name);  
             
-            for r=1:size(NewI,1)
-                for c=1:size(NewI,2)
-                    pixArray(count,r,c,1)=NewI(r,c,1);
-                    pixArray(count,r,c,2)=NewI(r,c,2);
-                    pixArray(count,r,c,3)=NewI(r,c,3);
-                end
-            end
-            
             if(count==3)
                 I1=NewI;
             end
@@ -39,24 +32,14 @@ function [matches] = PanoramaMain(inDir, f)
             end
             
             
-%             display(strcat(datestr(now,'HH:MM:SS'),' [INFO] ', ...
-%                 ' Creating file>',outFilename));  
-%             imwrite(NewI,outFilename);
+            display(strcat(datestr(now,'HH:MM:SS'),' [INFO] ', ...
+                ' Creating file>',outFilename));  
+            imwrite(NewI,outFilename);
         end
     end
     
     
-    for i=1: size(pixArray,1)
-        for r=1:size(pixArray,2)
-            for c=1:size(pixArray,3)
-                myImg(r,c,1)=pixArray(i,r,c,1);
-                myImg(r,c,2)=pixArray(i,r,c,2);
-                myImg(r,c,3)=pixArray(i,r,c,3);
-            end
-        end
-        figure
-        imshow(myImg);
-    end
+    
         
     srgStartup;
     figure

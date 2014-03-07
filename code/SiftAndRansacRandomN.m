@@ -1,10 +1,10 @@
-function [besthomography] = SiftAndRansacRandomN(img1, img2, epsilon)
+function [besthomography] = SiftAndRansacRandomN(img1, img2, epsilon, p)
 %UNTITLED Summary of this function goes here
 %   the images are 2 rgb image arrays
 
 threshold = 1.5; %default threshold
 bigP = 0.99;
-smallP = 0.2;
+smallP = p;
 
 gray1 = GetGrayImageFrom3DArray(img1);
 gray2 = GetGrayImageFrom3DArray(img2);
@@ -31,7 +31,7 @@ while k < 1
     secondPoints = zeros(2,n);
     for j = 1:size(points,2);
         firstPoints(:,j) = sift1(1:2, points(1,j));
-        secondPoints(:,j) = sift1(1:2, points(2,j));
+        secondPoints(:,j) = sift2(1:2, points(2,j));
     end
     homography = ComputeHomography(firstPoints, secondPoints);
     currinliers = 0;

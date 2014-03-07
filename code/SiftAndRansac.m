@@ -1,10 +1,10 @@
-function [besthomography] = SiftAndRansac(img1, img2, n, epsilon)
+function [besthomography] = SiftAndRansac(img1, img2, n, epsilon, p)
 %UNTITLED Summary of this function goes here
 %   the images are 2 rgb image arrays
 
 threshold = 1.5; %default threshold
 bigP = 0.99;
-smallP = 0.2;
+smallP = p;
 
 if (n < 4)
     n = 4;
@@ -21,6 +21,8 @@ sift2 = vl_sift(gray2);
 %2nd sift feature array
 matcharr = vl_ubcmatch(sift1, sift2, threshold);
 
+display(strcat('Number of matches: ', num2str(size(matcharr,2))));
+
 if (n > size(matcharr,2))
     display('n is larger than the number of feature matches, please try again');
     return;
@@ -29,22 +31,27 @@ end
 %Now RANSAC method
 
 k = round(log(1-bigP) / log(1 - (smallP ^ n)));
-display(strcat('The k is ', ' ', num2str(k)));
+display(strcat('k: ', num2str(k)));
 
 
 besthomography = zeros(3,3);
 maxinliers = 0;
 for i = 1:k
     [points, idx] = datasample(matcharr,n,2); %get n random points
+    
     %these will be 2 x n arrays of the points used for computing the
     %homography matrix
     firstPoints = zeros(2,n);
     secondPoints = zeros(2,n);
     for j = 1:size(points,2);
         firstPoints(:,j) = sift1(1:2, points(1,j));
-        secondPoints(:,j) = sift1(1:2, points(2,j));
+        secondPoints(:,j) = sift2(1:2, points(2,j));
     end
+    display(firstPoints);
+    display(secondPoints);
     homography = ComputeHomography(firstPoints, secondPoints);
+    clear inlierpoints1;
+    clear inlierpoints2;
     currinliers = 0;
     %now iterate through all of matches and find the num of inliers
     for index = 1:size(matcharr,2)
@@ -59,18 +66,21 @@ for i = 1:k
         point2(3) = 1;
         
         dist = norm(point2predicted - point2);
-        if (dist < epsilon) 
+        if (dist < epsilon)
             currinliers = currinliers + 1;
+            inlierpoints1(1:2,currinliers) = point1(1:2);
+            inlierpoints2(1:2,currinliers) = point2(1:2);
         end
     end
     
     if (currinliers > maxinliers)
         maxinliers = currinliers;
-        besthomography = homography;
+        refinedhomography = ComputeHomography(inlierpoints1,inlierpoints2);
+        besthomography = refinedhomography;
     end
 end
-display(strcat('The maximum number of inliers are ', num2str(maxinliers)));
 
+display(strcat('The maximum number of inliers: ', num2str(maxinliers)));
 
 end
 

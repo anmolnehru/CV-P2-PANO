@@ -13,8 +13,6 @@ for i = 1:size(firstPoints,2)
     end
 end
 
-
-
 b = ones(size(secondPoints,2) * 3);
 for i = 1:size(secondPoints,2)
     currStartRow = (i-1) * 3 + 1;

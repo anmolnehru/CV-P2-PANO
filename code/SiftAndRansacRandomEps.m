@@ -1,11 +1,11 @@
-function [besthomography] = SiftAndRansacRandomEps(img1, img2, n)
+function [besthomography] = SiftAndRansacRandomEps(img1, img2, n, p)
 %  Improve RANSAC by randomly trying different epsilons on each iteration
 %  and taking ratio of numInliers / epsilonSize to choose best
 %   the images are 2 rgb image arrays
 
 threshold = 1.5; %default threshold
 bigP = 0.99;
-smallP = 0.2;
+smallP = p;
 
 if (n < 4)
     n = 4;
@@ -44,7 +44,7 @@ for i = 1:k
     secondPoints = zeros(2,n);
     for j = 1:size(points,2);
         firstPoints(:,j) = sift1(1:2, points(1,j));
-        secondPoints(:,j) = sift1(1:2, points(2,j));
+        secondPoints(:,j) = sift2(1:2, points(2,j));
     end
     homography = ComputeHomography(firstPoints, secondPoints);
     currinliers = 0;

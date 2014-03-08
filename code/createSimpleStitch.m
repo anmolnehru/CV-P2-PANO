@@ -1,4 +1,4 @@
-function [ outImg ] = createSimpleStitch( pixArray, outDir )
+function [ outImg ] = createSimpleStitch( pixArray,SIFT_thresh, outDir )
     
     for r=1:size(pixArray,2)
         for c=1:size(pixArray,3)

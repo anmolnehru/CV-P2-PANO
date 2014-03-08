@@ -1,10 +1,7 @@
-function [] = PanoramaMain(inDir, f)
+function [] = PanoramaMain(inDir, f, SIFT_thresh, printCyl, doSIFT_Test)
     
-    DO_FLAG=1;
-    DO_FLAG=1;
-    DO_PRINT_IMG=1;
-    %DO_PRINT_IMG=1;
-    DO_PRINT_IMG=0;
+    DO_FLAG=doSIFT_Test;
+    DO_PRINT_IMG=printCyl;
     startup;
     srgStartup;
     warning('off','all');

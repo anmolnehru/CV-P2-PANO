@@ -43,7 +43,8 @@ function [] = PanoramaMain(inDir, f, SIFT_thresh, printCyl, doSIFT_Test)
     end    
     
     if(DO_FLAG==1)   
-        SiftTest( pixArray, SIFT_thresh, outDir);                    
+        
+                    
     end   
     
     simpleStitchedImg=createSimpleStitch(pixArray,outDir);

@@ -40,19 +40,75 @@ $("#includedContent").load("content.html");
 		<td width='315' alight=left valign=top>
 			<div id="includedContent"></div>
 		</td>
-		<td align=left valign=up>
+		<td align=left>
 	<!-- #### DISPLAY AREA ### -->
 			<font color="ffffff">
-<h2><center>Image Acquisition</center></h2>
-<center>
-The images were take with a Canon A640 (tag 4726208879) camera, Kaidan head and tripod.</br></br>
+<center> 
+<h2>Image Stitching: Simple Translations </h2>
+
+<table>
+	<tr>
+		<td>	
+			<img src="img/cyl/IMG_1387.JPG" height=300>
+		</td>
+		<td>			
+			<img src="http://i.stack.imgur.com/7adXU.jpg">
+		</td>
+		<td>	
+			<img src="img/cyl/cy_4.JPG" height=300>
+		</td>
+	</tr>	
+</table>
+
+<table>
+	<tr>	
+		<td>
+			<img src="img/cyl/cy_1.JPG" height=200>
+		</td>
+		<td>
+			<img src="img/cyl/cy_2.JPG" height=200>
+		</td>
+		<td>
+			<img src="img/cyl/cy_3.JPG" height=200>
+		</td>
+		<td>
+			<img src="img/cyl/cy_4.JPG" height=200>
+		</td>
+		<td>
+			<img src="img/cyl/cy_5.JPG" height=200>
+		</td>
+		<td>
+			<img src="img/cyl/cy_6.JPG" height=200>
+		</td>
+		<td>
+			<img src="img/cyl/cy_7.JPG" height=200>
+		</td>
+	</tr>
+	<tr>	
+		<td>
+			<img src="img/cyl/cy_8.JPG" height=200>
+		</td>
+		<td>
+			<img src="img/cyl/cy_9.JPG" height=200>
+		</td>
+		<td>
+			<img src="img/cyl/cy_11.JPG" height=200>
+		</td>
+		<td>
+			<img src="img/cyl/cy_12.JPG" height=200>
+		</td>
+		<td>
+			<img src="img/cyl/cy_13.JPG" height=200>
+		</td>
+		<td>
+			<img src="img/cyl/cy_14.JPG" height=200>
+		</td>
+		<td>
+			<img src="img/cyl/cy_15.JPG" height=200>
+		</td>
+	</tr>
+</table>
 </center>
-
-<center><img src="http://whatdigitalcamera.media.ipcdigital.co.uk/11133/000001170/57d4/Canon-A640multiview.jpg" height='500'></center>
- 
-
-
-
 
 			</font>
 	<!-- #### DISPLAY AREA ### -->			

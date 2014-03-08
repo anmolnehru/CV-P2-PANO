@@ -40,18 +40,12 @@ $("#includedContent").load("content.html");
 		<td width='315' alight=left valign=top>
 			<div id="includedContent"></div>
 		</td>
-		<td align=left valign=up>
+		<td align=left>
 	<!-- #### DISPLAY AREA ### -->
 			<font color="ffffff">
-<h2><center>Image Acquisition</center></h2>
-<center>
-The images were take with a Canon A640 (tag 4726208879) camera, Kaidan head and tripod.</br></br>
-</center>
+<h2><center> Image Stitching: Simple Translations </center></h2>
 
-<center><img src="http://whatdigitalcamera.media.ipcdigital.co.uk/11133/000001170/57d4/Canon-A640multiview.jpg" height='500'></center>
- 
-
-
+<img src="img/sift.jpg" >
 
 
 			</font>

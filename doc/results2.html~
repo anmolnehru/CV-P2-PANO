@@ -7,7 +7,7 @@
 	}
 	.myPano {
 		background-image: url(img/demo2.jpg);
-		height: 430px;
+		height: 50;
 		cursor: move;
 	}
 </style>

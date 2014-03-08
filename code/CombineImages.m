@@ -2,7 +2,7 @@ function [ combinedImage ] = CombineImages(img1, img2, h)
 %UNTITLED2 Summary of this function goes here
 %
 %   The order of the images should be the same as the SiftAndRansac
-%   function
+%   function...the left image is entered first
 
 minRow = 99999999;
 maxRow = 0;
@@ -36,6 +36,7 @@ for i = 1:4
     end
 end
 
+%flip rows and columns
 minRow = round(minRow);
 minCol = round(minCol);
 tmp = minCol;
@@ -58,6 +59,7 @@ newNumCols = abs(minCol) + img2cols;
 combinedImage = zeros(newNumRows, newNumCols,3);
 combinedImage = uint8(combinedImage);
 
+%add left image
 for i = 1:img1rows
     for j = 1:img1cols
         currPoint = img1(i,j,:);
@@ -68,9 +70,11 @@ for i = 1:img1rows
         warpedPixel = round(warpedPixel);
         
         %This is used for feather blending
-        diff = j + 1 - abs(minCol);
+        %diff = j + 1 - abs(minCol);
+        diff = warpedPixel(1);
         if (diff > 0)
             multiplier = double(maxCol - diff) / double(maxCol);
+            %multiplier = double(img1cols - abs(minCol) - diff) / double(img1cols - abs(minCol));
             currPoint = double(currPoint * multiplier);
             currPoint = uint8(currPoint);
             combinedImage(warpedPixel(1) + abs(minCol) + 1, warpedPixel(2) + abs(minRow) + 1, :) = currPoint;
@@ -78,71 +82,41 @@ for i = 1:img1rows
             currPoint = uint8(currPoint);
             combinedImage(warpedPixel(1) + abs(minCol) + 1, warpedPixel(2) + abs(minRow) + 1, :) = currPoint;
         end
-        combinedImage(warpedPixel(1) + abs(minCol) + 1, warpedPixel(2) + abs(minRow) + 1, :) = currPoint;
     end
 end
 
-for i = 1:img2rows
-    for j = 1:img2cols
-        currPoint = img2(i,j,:);
-        if (isequal(currPoint, zeros(1,1,3)))
-            continue;
-        end
-        
-        %This is used for feather blending
-        %diff = abs(minCol) - (j + 1);
-        diff = abs(minCol) - (j + 1);
-        if (diff > 0)
-            multiplier = double(maxCol - diff) / double(maxCol);
-            currPoint = double(currPoint * multiplier);
-
-            combinedImage(i + abs(minRow), j + abs(minCol), :) = ...
-                double(combinedImage(i + abs(minRow), j + abs(minCol), :));
-            
-            combinedImage(i + abs(minRow), j + abs(minCol), 1) = ...
-                (currPoint(1,1,1) + combinedImage(i + abs(minRow), j + abs(minCol), 1) );
-            combinedImage(i + abs(minRow), j + abs(minCol), 2) = ...
-                (currPoint(1,1,2) + combinedImage(i + abs(minRow), j + abs(minCol), 2) );
-            combinedImage(i + abs(minRow), j + abs(minCol), 3) = ...
-                (currPoint(1,1,3) + combinedImage(i + abs(minRow), j + abs(minCol), 3) );
-        else
-            combinedImage(i + abs(minRow), j + abs(minCol), :) = currPoint;
-        end
-        combinedImage(i + abs(minRow), j + abs(minCol), :) = currPoint;
-    end
-end
+%add right image
+% for i = 1:img2rows
+%     for j = 1:img2cols
+%         currPoint = img2(i,j,:);
+%         if (isequal(currPoint, zeros(1,1,3)))
+%             continue;
+%         end
+%         
+%         %This is used for feather blending
+%         %diff = abs(minCol) - (j + 1);
+%         %diff = abs(maxCol) - (j + 1);
+%         diff = abs(maxCol) - (j + 1);
+%         if (diff > 0)
+%             multiplier =  double(maxCol - diff) / double(maxCol);
+%             currPoint = double(currPoint * multiplier);
+% 
+%             combinedImage(i + abs(minRow), j + abs(minCol), :) = ...
+%                 double(combinedImage(i + abs(minRow), j + abs(minCol), :));
+%             
+%             combinedImage(i + abs(minRow), j + abs(minCol), 1) = ...
+%                 (currPoint(1,1,1) + combinedImage(i + abs(minRow), j + abs(minCol), 1) );
+%             combinedImage(i + abs(minRow), j + abs(minCol), 2) = ...
+%                 (currPoint(1,1,2) + combinedImage(i + abs(minRow), j + abs(minCol), 2) );
+%             combinedImage(i + abs(minRow), j + abs(minCol), 3) = ...
+%                 (currPoint(1,1,3) + combinedImage(i + abs(minRow), j + abs(minCol), 3) );
+%         else
+%             combinedImage(i + abs(minRow), j + abs(minCol), :) = currPoint;
+%         end
+%     end
+% end
 
 % Linear interpolation
-
-% for i = 1:newNumRows
-%     for j = 1:newNumCols
-%         if (isequal(combinedImage(i,j,:),zeros(1,1,3)))
-%             combinedImage(i,j,:) = (double(combinedImage(min(newNumRows,i + 1),j,:)) + ...
-%                 double(combinedImage(max(1, i - 1),j,:)) + double(combinedImage(i,min(newNumCols,j + 1),:)) + ...
-%                 double(combinedImage(i,max(1, j - 1),:))) / 4.0;
-%         end
-%     end
-% end
-
-% for i = 12:newNumRows - 1
-%     for j = 12:newNumCols - 1
-%         if (isequal(combinedImage(i,j,:),zeros(1,1,3)))
-%             combinedImage(i,j,:) = (double(combinedImage(i + 1,j,:)) + ...
-%                 double(combinedImage(i - 1,j,:)) + double(combinedImage(i,j + 1,:)) + ...
-%                 double(combinedImage(i,j - 1,:))) / 4.0;
-%         end
-%     end
-% end
-
-% for j = 1:newNumCols
-%     for i = 1:newNumRows
-%         if (isequal(combinedImage(i,j,:),zeros(1,1,3)))
-%             combinedImage(i,j,:) = (double(combinedImage(min(newNumRows,i + 1),j,:)) + ...
-%                 double(combinedImage(max(1, i - 1),j,:)) + double(combinedImage(i,min(newNumCols,j + 1),:)) + ..C.
-%                 double(combinedImage(i,max(1, j - 1),:))) / 4.0;
-%         end
-%     end
-% end
 
 if (newNumCols < 31 || newNumRows < 31)
     combinedImage = uint8(combinedImage);

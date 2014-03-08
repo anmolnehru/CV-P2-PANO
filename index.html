@@ -1,8 +1,39 @@
 <html>
 <head>
+
+<style>
+	html, body {
+		margin: 0;
+		padding: 0;
+	}
+	.cycle {
+		background-image: url(demo_photo.jpg);
+		height: 512px;
+		cursor: move;
+	}
+	.box {
+		width: 512px;
+		margin: 0 auto;
+		font-family: arial, sans-serif;
+	}
+</style>
+
 </head>
 <!-- main -->
 <body bgcolor="#000000" link="#C0C0C0" vlink="#808080" alink="#FF0000" >
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+<script type="text/javascript" src="jquery.cyclotron.js"></script>
+
+<!--<script src="jquery-1.7.1.min.js"></script>-->
+		<!--<script src="cycle.js"></script>-->
+		<script src="jquery.cyclotron.js"></script>
+		<script>
+		$(document).ready(function ($) {
+			$('.cycle').cyclotron();
+		});
+		</script>
+
 <center>
 <table width=1300 >
 	<tr align=center>
@@ -56,12 +87,10 @@
 			</font>
 		</td>
 		<td align=right>
-			<table cellspacing=0 cellpadding=0>
-				
+
+			<div class="cycle"></div>
 
 
-
-			</table>
 		</td>
 
 	
@@ -72,12 +101,7 @@
 		<td colspan=2>
 			<hr>
 			</br>
-			<img src="doc/img/img2.JPG" width="200"> &nbsp;
-			<img src="doc/img/img1.JPG" width="200"> &nbsp;
-			<img src="doc/img/img3.JPG" width="200"> &nbsp;
-			<img src="doc/img/ToneMap-Global-1100-1100-50.jpg" width="200"> &nbsp;
-			<img src="doc/img/ToneMap-Matlab-3-150.jpg" width="200"> &nbsp;
-			<img src="doc/img/ToneMap-Matlab-6-150.jpg" width="200"> &nbsp;
+			<img src="demo_photo.jpg" height="200">
 
 			<hr>
 		</td>

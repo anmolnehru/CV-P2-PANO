@@ -17,6 +17,10 @@ function [] = PanoramaMain(inDir, f)
         ' Output dir created at ',outDir));
     
     srcFiles = dir(strcat(inDir,'*.*')); 
+    
+    [~,order] = sort_nat({srcFiles.name});
+    srcFiles = srcFiles(order);
+    
     count=0;
     for i = 1 : length(srcFiles)
         if (srcFiles(i).isdir~=1)

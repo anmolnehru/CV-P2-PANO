@@ -57,10 +57,33 @@
 		</td>
 		<td align=right>
 			<table cellspacing=0 cellpadding=0>
-				
-
-
-
+				<tr>
+					<td rowspan=3>
+						<img src="doc/img/ToneMap-Matlab-8-100.jpg" height="480"> &nbsp;
+					</td>
+					<td>
+						</br>
+					</td>
+					<td>						
+						<img src="doc/img/IMG_9495.jpg" height="160">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						</br>
+					</td>
+					<td>
+						<img src="doc/img/IMG_9496.jpg" height="160">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						</br>
+					</td>
+					<td>
+						<img src="doc/img/IMG_9497.jpg" height="160">
+					</td>
+				</tr>
 			</table>
 		</td>
 

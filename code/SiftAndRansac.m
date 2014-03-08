@@ -1,8 +1,7 @@
 function [besthomography] = SiftAndRansac(img1, img2, n, epsilon, p)
 %UNTITLED Summary of this function goes here
 %   the images are 2 rgb image arrays
-%   the first image entered should be on the right with respect to the next
-%   image
+%   the first image entered should be on the left with respect to the next
 
 threshold = 1.5; %default threshold
 bigP = 0.99;

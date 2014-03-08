@@ -1,10 +1,7 @@
 function [] = PanoramaMain(inDir, f)
     
-    %pointsToSample = 4;
-    %epsilon = 10;
-    %f=660;
     DO_FLAG=1;
-    DO_FLAG=0;
+    DO_FLAG=1;
     DO_PRINT_IMG=1;
     %DO_PRINT_IMG=1;
     DO_PRINT_IMG=0;
@@ -16,8 +13,7 @@ function [] = PanoramaMain(inDir, f)
     display(strcat(datestr(now,'HH:MM:SS'),' [INFO] ', ...
         ' Output dir created at ',outDir));
     
-    srcFiles = dir(strcat(inDir,'*.*')); 
-    
+    srcFiles = dir(strcat(inDir,'*.*'));     
     [~,order] = sort_nat({srcFiles.name});
     srcFiles = srcFiles(order);
     

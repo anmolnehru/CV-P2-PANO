@@ -22,33 +22,18 @@ panorama = cropImg(reshape(pixarray(1,:,:,:),imgrows,imgcols,3));
 for i = 2:size(pixarray,1)
     display(strcat('Combining with image: ', num2str(i)));
     currimg = cropImg(reshape(pixarray(i,:,:,:),imgrows,imgcols,3));
-    if (direction == 1)
-       if (type == 1)
-           h = SiftAndRansac(panorama, currimg, n, epsilon, smallP);
-       elseif (type == 2)
-           h = SiftAndRansacMinDist(panorama, currimg, n, smallP);
-       elseif (type == 3)
-           h = SiftAndRansacRandomEps(panorama, currimg, n, smallP);
-       elseif (type == 4)
-           h = SiftAndRansacRandomN(panorama, currimg, epsilon, smallP);
-       elseif (type == 5)
-           h = SiftAndRansacRandomEpsAndN(panorama, currimg, smallP);
-       end
-       panorama = CombineImages(panorama,currimg, h);
-    else
-       if (type == 1)
-           h = SiftAndRansac(currimg, panorama, n, epsilon, smallP);
-       elseif (type == 2)
-           h = SiftAndRansacMinDist(currimg, panorama, n, smallP);
-       elseif (type == 3)
-           h = SiftAndRansacRandomEps(currimg, panorama, n, smallP);
-       elseif (type == 4)
-           h = SiftAndRansacRandomN(currimg, panorama, epsilon, smallP);
-       elseif (type == 5)
-           h = SiftAndRansacRandomEpsAndN(currimg, panorama, smallP);
-       end
-       panorama = CombineImages(currimg, panorama, h);
+    if (type == 1)
+        h = SiftAndRansac(currimg, panorama, n, epsilon, smallP);
+    elseif (type == 2)
+        h = SiftAndRansacMinDist(currimg, panorama, n, smallP);
+    elseif (type == 3)
+        h = SiftAndRansacRandomEps(currimg, panorama, n, smallP);
+    elseif (type == 4)
+        h = SiftAndRansacRandomN(currimg, panorama, epsilon, smallP);
+    elseif (type == 5)
+      h = SiftAndRansacRandomEpsAndN(currimg, panorama, smallP);
     end
+    panorama = CombineImages(currimg, panorama, h);
     imwrite(panorama, strcat(outDir, '/PANO_', num2str(i), '.jpg'));
 end
 

@@ -2,7 +2,7 @@ function [ combinedImage ] = CombineImages(img1, img2, h)
 %UNTITLED2 Summary of this function goes here
 %
 %   The order of the images should be the same as the SiftAndRansac
-%   function...the left image is entered first
+%   function
 
 minRow = 99999999;
 maxRow = 0;
@@ -46,6 +46,11 @@ tmp = maxCol;
 maxCol = maxRow;
 maxRow = tmp;
 
+if (minCol > 0)
+    combinedImage = CombineImages(img2, img1, inv(h));
+    return;
+end
+
 display(strcat('The min row is:', num2str(minRow)));
 display(strcat('The min col is:', num2str(minCol)));
 display(strcat('The max row is:', num2str(maxRow)));
@@ -59,63 +64,62 @@ newNumCols = abs(minCol) + img2cols;
 combinedImage = zeros(newNumRows, newNumCols,3);
 combinedImage = uint8(combinedImage);
 
-%add left image
-for i = 1:img1rows
-    for j = 1:img1cols
-        currPoint = img1(i,j,:);
-        if (isequal(currPoint, zeros(1,1,3)))
-            continue;
-        end
-        warpedPixel = h * [i j 1]';
-        warpedPixel = round(warpedPixel);
-        
-        %This is used for feather blending
-        %diff = j + 1 - abs(minCol);
-        diff = warpedPixel(2);
-        if (diff > 0)
-            multiplier = double(maxCol - diff) / double(maxCol);
-            %multiplier = double(img1cols - abs(minCol) - diff) / double(img1cols - abs(minCol));
-            currPoint = double(currPoint * multiplier);
-            currPoint = uint8(currPoint);
-            combinedImage(warpedPixel(1) + abs(minCol) + 1, warpedPixel(2) + abs(minRow) + 1, :) = currPoint;
-        else
-            currPoint = uint8(currPoint);
+%if (warpedImgOnRight == false)
+    %add left image
+    for i = 1:img1rows
+        for j = 1:img1cols
+            currPoint = img1(i,j,:);
+            if (isequal(currPoint, zeros(1,1,3)))
+                continue;
+            end
+            warpedPixel = h * [i j 1]';
+            warpedPixel = round(warpedPixel);
             combinedImage(warpedPixel(1) + abs(minCol) + 1, warpedPixel(2) + abs(minRow) + 1, :) = currPoint;
         end
     end
-end
 
 
-%add right image
-for i = 1:img2rows
-    for j = 1:img2cols
-        currPoint = img2(i,j,:);
-        if (isequal(currPoint, zeros(1,1,3)))
-            continue;
-        end
-        
-        %This is used for feather blending
-        %diff = abs(minCol) - (j + 1);
-        %diff = abs(maxCol) - (j + 1);
-        diff = abs(maxCol) - (j + 1);
-        if (diff > 0)
-            multiplier =  double(maxCol - diff) / double(maxCol);
-            currPoint = double(currPoint * multiplier);
+    %add right image
+    for i = 1:img2rows
+        for j = 1:img2cols
+            currPoint = img2(i,j,:);
+            if (isequal(currPoint, zeros(1,1,3)))
+                continue;
+            end
 
-            combinedImage(i + abs(minRow), j + abs(minCol), :) = ...
-                double(combinedImage(i + abs(minRow), j + abs(minCol), :));
-            
-            combinedImage(i + abs(minRow), j + abs(minCol), 1) = ...
-                (currPoint(1,1,1) + combinedImage(i + abs(minRow), j + abs(minCol), 1) );
-            combinedImage(i + abs(minRow), j + abs(minCol), 2) = ...
-                (currPoint(1,1,2) + combinedImage(i + abs(minRow), j + abs(minCol), 2) );
-            combinedImage(i + abs(minRow), j + abs(minCol), 3) = ...
-                (currPoint(1,1,3) + combinedImage(i + abs(minRow), j + abs(minCol), 3) );
-        else
-            combinedImage(i + abs(minRow), j + abs(minCol), :) = currPoint;
+            %This is used for feather blending
+            %diff = abs(minCol) - (j + 1);
+            diff = abs(maxCol) - (j + 1);
+            if (diff > 0)
+                if (isequal(combinedImage(i + abs(minRow), j + abs(minCol), :), zeros(1,1,3)))
+                    combinedImage(i + abs(minRow), j + abs(minCol), :) = currPoint;
+                    continue;
+                end
+                weight =  double(maxCol - diff) / double(maxCol);
+
+                r_img1 = (1 - weight) * double(combinedImage(i + abs(minRow), j + abs(minCol), 1));
+                g_img1 = (1 - weight) * double(combinedImage(i + abs(minRow), j + abs(minCol), 2));
+                b_img1 = (1 - weight) * double(combinedImage(i + abs(minRow), j + abs(minCol), 3));
+
+                r_img2 = weight * double(currPoint(1,1,1));
+                g_img2 = weight * double(currPoint(1,1,2));
+                b_img2 = weight * double(currPoint(1,1,3));
+
+    %             display(r_img1);
+    %             display(r_img2);
+    %             display(g_img1);
+    %             display(g_img2);
+    %             display(b_img1);
+    %             display(b_img2);
+
+                combinedImage(i + abs(minRow), j + abs(minCol), 1) = r_img1 + r_img2;
+                combinedImage(i + abs(minRow), j + abs(minCol), 2) = g_img1 + g_img2;
+                combinedImage(i + abs(minRow), j + abs(minCol), 3) = b_img1 + b_img2;
+            else
+                combinedImage(i + abs(minRow), j + abs(minCol), :) = currPoint;
+            end
         end
     end
-end
 
 % Linear interpolation
 

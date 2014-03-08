@@ -48,8 +48,6 @@ for i = 1:k
         firstPoints(:,j) = sift1(1:2, points(1,j));
         secondPoints(:,j) = sift2(1:2, points(2,j));
     end
-%     display(firstPoints);
-%     display(secondPoints);
     homography = ComputeHomography(firstPoints, secondPoints);
     clear inlierpoints1;
     clear inlierpoints2;

@@ -6,15 +6,10 @@
 		margin: 0;
 		padding: 0;
 	}
-	.cycle {
-		background-image: url(demo_photo.jpg);
-		height: 512px;
+	.myPano {
+		background-image: url(doc/img/demo_photo.jpg);
+		height: 547px;
 		cursor: move;
-	}
-	.box {
-		width: 512px;
-		margin: 0 auto;
-		font-family: arial, sans-serif;
 	}
 </style>
 
@@ -22,24 +17,23 @@
 <!-- main -->
 <body bgcolor="#000000" link="#C0C0C0" vlink="#808080" alink="#FF0000" >
 
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
-<script type="text/javascript" src="jquery.cyclotron.js"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="jquery.js"></script> 
+<!--http://kaioa.com/k/test/cyclotron/index.html-->
+<script type="text/javascript"  src="doc/js/jquery.panoViewer.js"></script>
 
-<!--<script src="jquery-1.7.1.min.js"></script>-->
-		<!--<script src="cycle.js"></script>-->
-		<script src="jquery.cyclotron.js"></script>
-		<script>
-		$(document).ready(function ($) {
-			$('.cycle').cyclotron();
-		});
-		</script>
+<script>
+$(document).ready(function ($) {
+	$('.myPano').panoViewer();
+});
+</script>
 
 <center>
 <table width=1300 >
 	<tr align=center>
 		<td colspan=2>
 			<font color="#58FAF4">
-			<h1><b>CS 766 Computer Vision Assignment 1: High Dynamic Range (HDR)</b></h1>
+			<h1><b>CS 766 Computer Vision Assignment 2: Panorama & Mosaics</b></h1>
 			</font>
 			<font color="#FFFFFF">			
 			<i>Saikat R. Gomes (<a href="mailto=saikat@cs.wisc.edu">saikat@cs.wisc.edu</a>) & Stephen Lazzaro (<a href="mailto=slazzaro@cs.wisc.edu">slazzaro@cs.wisc.edu</a>)</i>
@@ -47,8 +41,7 @@
 		</td>
 	</tr>
 	<tr>
-		<td colspan=2>
-			</br>
+		<td colspan=2>			
 			<hr>
 		</td>
 	</tr>
@@ -69,28 +62,33 @@
 			  <li><a href="doc/implement.html">Implementation</a></li>
 			  <ol type="1">
 			    <li><a href="doc/imgAcc.html">Image Acquisition</a></li>
-			    <li><a href="doc/simple.html">Simple Pixel Averaging</a></li>
-			    <li><a href="doc/rc.html">Response Curves</a></li>
-			    <li><a href="doc/tonemap.html">Tone Mapping (Matlab)</a></li>
-			    <li><a href="doc/rltm.html">Reinhard's Local Tone Mapping</a></li>
-			    <li><a href="doc/rgtm.html">Reinhard's Global Tone Mapping</a></li>
-			    <li><a href="doc/wards.html">Ward's Algorithm</a></li>
+			    <li><a href="doc/simple.html">Cylindrical Coordinates</a></li>
+			    <li><a href="doc/simple.html">SIFT Feature detection</a></li>
+			    <li><a href="doc/rc.html">Ransac Translation</a></li>
+			    <li><a href="doc/tonemap.html">Homographies</a></li>
+			    <li><a href="doc/rgtm.html">Stitching: Translastion</a></li>
+			    <li><a href="doc/wards.html">Stitching: Perspective</a></li>
+			    <li><a href="doc/wards.html">Image Blending</a></li>
 			  </ol>
-			  <li><a href="doc/results.html">Results Comparison 1</a></li>
-			  <li><a href="doc/results2.html">Results Comparison 2</a></li>
-			  <li><a href="doc/results3.html">Results of Ward's Algo</a></li>
+			  <li><a href="doc/results.html">Results</a></li>
+			  <ol type="1">
+			    <li><a href="doc/results2.html">Results 1</a></li>
+			    <li><a href="doc/results3.html">Results 2</a></li>
+			  </ol>
 			  <li><a href="doc/dataset.html">Datasets</a></li>
 			  <li><a href="doc/code.html">Code</a></li>
-			  <li><a href="https://github.com/saikatgomes/CV-P1-HDR/commits/master" target="_blank">Git Logs<a></li>
+			  <li><a href="https://github.com/saikatgomes/CV-P2-PANO/commits/master" target="_blank">Git Logs<a></li>
 			  <li><a href="doc/ref.html">References</a></li>
 			</ol>
 			</font>
 		</td>
 		<td align=right>
-
-			<div class="cycle"></div>
-
-
+			<div class="myPano"></div>
+			<font color="#ffffff" size="1.5">	
+			<center>
+			<i>Drag the above image (left/right) to view the entire panorama mosaic</i>
+			</center>
+			</font>
 		</td>
 
 	
@@ -100,14 +98,7 @@
 	<tr align=center>
 		<td colspan=2>
 			<hr>
-			</br>
-			<img src="doc/img/img2.JPG" width="200"> &nbsp;
-			<img src="doc/img/img1.JPG" width="200"> &nbsp;
-			<img src="doc/img/img3.JPG" width="200"> &nbsp;
-			<img src="doc/img/ToneMap-Global-1100-1100-50.jpg" width="200"> &nbsp;
-			<img src="doc/img/ToneMap-Matlab-3-150.jpg" width="200"> &nbsp;
-			<img src="doc/img/ToneMap-Matlab-6-150.jpg" width="200"> &nbsp;
-
+			<img src="doc/img/demo_photo.jpg"  width=1300>
 			<hr>
 		</td>
 

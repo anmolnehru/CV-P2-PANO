@@ -76,6 +76,8 @@ We also experiment with different tone mapping algorithms.  We compared images b
 We discovered that using Ward's algorithm gave much better results when we put the images through an edge filter beforehand (we used the Prewitt edge filter).  Without using the edge filter, there was much more noise and the algorithm would return much larger faulty shifts for images. 
 </li>
 </ol>
+</br>
+</br>
  
 <h3>Our Image (*.jpg and *.hdr) for submission can be found <a href="../Vote">here<a></h3>
 

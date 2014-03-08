@@ -5,6 +5,20 @@
 <!-- INTRO -->
 
 <body bgcolor="#000000" link="#C0C0C0" vlink="#808080" alink="#FF0000">
+
+
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="jquery.js"></script> 
+<!--http://kaioa.com/k/test/cyclotron/index.html-->
+<script type="text/javascript"  src="js/jquery.panoViewer.js"></script>
+
+<script> 
+$(function(){
+$("#includedContent").load("content.html"); 
+});
+</script> 
+
 <center>
 <table width=1300 >
 	<tr align=center>
@@ -19,103 +33,30 @@
 	</tr>
 	<tr>
 		<td colspan=2>
-			</br>
 			<hr>
 		</td>
 	</tr>
 	<tr>
 		<td width='315' alight=left valign=top>
-			<font color="ffffff">
-			<h2>
-			<font color="#A9F5F2">	
-			Contents
-			</font>
-			</h2>
-			<ol type="0">
-			  <li><a href="../index.html">Home</a></li>
-			  <li><a href="intro.html">Introduction</a></li>
-			  <li><a href="implement.html">Implementation</a></li>
-			  <ol type="1">
-			    <li><a href="imgAcc.html">Image Acquisition</a></li>
-			    <li><a href="simple.html">Simple Pixel Averaging</a></li>
-			    <li><a href="rc.html">Response Curves</a></li>
-			    <li><a href="tonemap.html">Tone Mapping (Matlab)</a></li>
-			    <li><a href="rltm.html">Reinhard's Local Tone Mapping</a></li>
-			    <li><a href="rgtm.html">Reinhard's Global Tone Mapping</a></li>
-			    <li><a href="wards.html">Ward's Algorithm</a></li>
-			  </ol>
-			  <li><a href="results.html">Results Comparison 1</a></li>
-			  <li><a href="results2.html">Results Comparison 2</a></li>
-			  <li><a href="results3.html">Results of Ward's Algo</a></li>
-			  <li><a href="dataset.html">Datasets</a></li>
-			  <li><a href="code.html">Code</a></li>
-			  <li><a href="https://github.com/saikatgomes/CV-P1-HDR/commits/master" target="_blank">Git Logs<a></li>
-			  <li><a href="ref.html">References</a></li>
-			</ol>
-			</font>
+			<div id="includedContent"></div>
 		</td>
 		<td align=left>
 	<!-- #### DISPLAY AREA ### -->
 			<font color="ffffff">
-<center>(Note: you can right click and view the images in a new tab)</center>
-<h3><center> Below are the results of applying Ward's Algorithms to our dataset. </center></h3>
-<table>
-					<tr align=center>
-						<td>
-							<img src="img/IMG_9495.jpg" width="325"></br>
-							<font color="ffffff">
-							<h2>Original Image 1</h2>
-							</font>
-						</td>
-						<td>
-							<img src="img/IMG_9496.jpg" width="325"></br>
-							<font color="ffffff">
-							<h2>Original Image 1</h2>
-							</font>
-						</td>
-						<td>
-							<img src="img/IMG_9497.jpg" width="325"></br>
-							<font color="ffffff">
-							<h2>Original Image 1</h2>
-							</font>
-						</td>
-					</tr>
-					<tr>
-						<td colspan=3>
-							<hr>
-						</td>
-					</tr>
-					<tr align=center>
-						<td>
-							<img src="img/wardNoEdge.jpg" width="325"></br>
-							<font color="ffffff">
-							<h2>Ward's (without edge filter)</h2>
-							</font>
-						</td>
-						<td>
-							<img src="img/wardEdge.jpg" width="325"></br>
-							<font color="ffffff">
-							<h2>Ward's (with edge filter)</h2>
-							</font>
-						</td>
-						<td>
-							<img src="img/wardStdHdr.jpg" width="325"></br>
-							<font color="ffffff">
-							<h2>Standard HDR</h2>
-							</font>
-						</td></td>
-					</tr>
-				</table>
+<h2><center> Image Stitching: Simple Translations </center></h2>
+
+
+
 
 			</font>
-
 	<!-- #### DISPLAY AREA ### -->			
 		</td>
 	</tr>
 	<tr align=center>
 		<td colspan=2>
 			<hr>
-			</br>
+			<img src="img/demo_photo.jpg"  width=1300>
+			<hr>
 		</td>
 
 	<tr>

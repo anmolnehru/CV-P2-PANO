@@ -1,6 +1,4 @@
 function [ outImg ] = createSimpleStitch( pixArray, outDir )
-
-    outImg=1;
     
     for r=1:size(pixArray,2)
         for c=1:size(pixArray,3)
@@ -9,8 +7,7 @@ function [ outImg ] = createSimpleStitch( pixArray, outDir )
             I1(r,c,3)=pixArray(1,r,c,3);
         end
     end
-    
-    
+       
     
     for ii=2: size(pixArray,1)
 
@@ -36,43 +33,45 @@ function [ outImg ] = createSimpleStitch( pixArray, outDir )
         end
         
         %images are already cropped
-            I1=cropImg(I1);
-            I2=cropImg(I2);
+        I1=cropImg(I1);
+        I2=cropImg(I2);
         I1_ori=I1;
-        I2_ori=I2;      
+        I2_ori=I2;        
         
+        imshow(uint8(I1_ori));
         
         MAX_OVERLAP_Y=size(I2,1)/8;
         MAX_OVERLAP_X=size(I2,2)/2;
+% % %         hold off
+% % %         saveas(handle,strcat(outDir,'/switch_',num2str(ii),'.jpg'));
 
         I1 = single(rgb2gray(I1)) ;
         [f,d] = vl_sift(I1) ;
         I2 = single(rgb2gray(I2)) ;
         [f2,d2] = vl_sift(I2) ;
 
-        [matches, scores] = vl_ubcmatch(d, d2, 1) ;       
+        [matches, scores] = vl_ubcmatch(d, d2, 2) ;              
         
-        
-        img2=zeros(size(I1_ori,1),size(I1_ori,2)+size(I2_ori,2),3);
-        for i=1:size(I2_ori,1)
-           for j=1:size(I2_ori,2)
-              img2(i,j,:)=I1_ori(i,j,:);
-              img2(i,j+size(I1_ori,2),:)=I2_ori(i,j,:);
-              
-              if(j==MAX_OVERLAP_X)
-                  img2(i,j,1)=0;
-                  img2(i,j,2)=0;
-                  img2(i,j,3)=0;
-                  img2(i,j+size(I1_ori,2),1)=0;
-                  img2(i,j+size(I1_ori,2),2)=0;
-                  img2(i,j+size(I1_ori,2),3)=0;
-              end
-           end
-        end    
+% % % %         img2=zeros(size(I1_ori,1),size(I1_ori,2)+size(I2_ori,2),3);
+% % % %         for i=1:size(I2_ori,1)
+% % % %            for j=1:size(I2_ori,2)
+% % % %               img2(i,j,:)=I1_ori(i,j,:);
+% % % %               img2(i,j+size(I1_ori,2),:)=I2_ori(i,j,:);
+% % % %               
+% % % %               if(j==MAX_OVERLAP_X)
+% % % %                   img2(i,j,1)=0;
+% % % %                   img2(i,j,2)=0;
+% % % %                   img2(i,j,3)=0;
+% % % %                   img2(i,j+size(I1_ori,2),1)=0;
+% % % %                   img2(i,j+size(I1_ori,2),2)=0;
+% % % %                   img2(i,j+size(I1_ori,2),3)=0;
+% % % %               end
+% % % %            end
+% % % %         end    
 
-        handle = figure ;
-        imshow(uint8(img2));
-        hold on        
+% % %         handle = figure ;
+% % %         imshow(uint8(img2));
+% % %         hold on        
         clear fx1;
         clear fx2;
         clear fy1;
@@ -88,14 +87,9 @@ function [ outImg ] = createSimpleStitch( pixArray, outDir )
             x2=f2(1,i2);
             y1=f(2,i1);
             y2=f2(2,i2);
-            %display(strcat('(',num2str(x1),',',num2str(y1),') - (',num2str(x2),',',num2str(y2),')' ));
-
-            if(size(I1,2)-x1>MAX_OVERLAP_X || size(I2,2)-x2<MAX_OVERLAP_X)
+           
+            if(size(I1,2)-x1>MAX_OVERLAP_X || size(I2,2)-x2<MAX_OVERLAP_X || abs(y1-y2)>MAX_OVERLAP_Y)
                 continue;
-            end
-
-            if(abs(y1-y2)>MAX_OVERLAP_Y)                
-              continue;
             end
             
             pt_count=pt_count+1;
@@ -107,46 +101,73 @@ function [ outImg ] = createSimpleStitch( pixArray, outDir )
             
             x_sum=x_sum+(abs(fx1-fx2));
             y_sum=y_sum+(fy1-fy2);
-            
-            p1 = [fx1,fx2];
-            p2 = [fy1,fy2];
-            line(p1,p2,'Color','r','LineWidth',.5);
+             
+% % %              p1 = [fx1,fx2];
+% % %              p2 = [fy1,fy2];
+% % %             line(p1,p2,'Color','r','LineWidth',.5);
         end
-        hold off
-        saveas(handle,strcat(outDir,'/switch_',num2str(ii),'.jpg'));
+% % %         hold off
+% % %         saveas(handle,strcat(outDir,'/switch_',num2str(ii),'.jpg'));
 
         x_t = round(x_sum/pt_count);
         y_t = round(y_sum/pt_count);
 
-
         img3=zeros(size(I1_ori,1),size(I1_ori,2)+size(I2_ori,2)-x_t,3);
+        for i=1:size(I1_ori,1)
+            for j=1:size(I1_ori,2)
+                img3(i,j,:)=I1_ori(i,j,:);               
+            end
+        end
+        
         for i=1:size(I2_ori,1)
            for j=1:size(I2_ori,2)
-              img3(i,j,:)=I1_ori(i,j,:);
-              if(i+y_t<size(I2_ori,1)&&i+y_t>=0)
+              %img3(i,j,:)=I1_ori(i,j,:);
+              if(i+y_t<size(I2_ori,1)&&i+y_t>0)
                   y_plus = y_t;
-                  %y_plus = 0;
               else
                   y_plus = 0;
               end
-              img3(i+y_plus,j+size(I1_ori,2)-x_t,:)=I2_ori(i,j,:);
               
+              if(j<x_t)
+                  w1=x_t-j;
+                  w2=j;
+                  w=w1+w2;
+                  
+                  for k=1:3
+
+                      rgb1=double(I1_ori(i+y_plus,j+size(I1_ori,2)-x_t,k));
+                      rgb2=double(I2_ori(i,j,k));
+                      
+                      %display(strcat('w1=',num2str(w1),' rgb1=',num2str(rgb1),' w2=',num2str(w2),' rgb2=',num2str(rgb2),' w=',num2str(w)));
+                      
+                      rgb1=double(w1*rgb1);
+                      rgb2=double(w2*rgb2) ;    
+                      rgb=(rgb1+rgb2)/w;
+                      
+                      %display(strcat('w1=',num2str(w1),' rgb1=',num2str(rgb1),' w2=',num2str(w2),' rgb2=',num2str(rgb2),' w=',num2str(w),' rgb=',num2str(rgb)));
+                      
+                       img3(i+y_plus,j+size(I1_ori,2)-x_t,k)=uint8(rgb);
+                      
+                  end
+                                  
+              else             
+                img3(i+y_plus,j+size(I1_ori,2)-x_t,:)=I2_ori(i,j,:);              
+              end
            end
         end    
         
         img3=cropImg(img3);
         img3=uint8(img3);
-        figure;
-        imshow(img3);
-        imwrite(img3,strcat(outDir,'/pairJoin_',num2str(ii),'.jpg'));
-        
-        
-        clear I1;
-        I1=I2_ori;
-        
+        %figure;
+% % %         imshow(img3);
+        %imwrite(img3,strcat(outDir,'/pairJoin_',num2str(ii),'.jpg'));
+                
+        %clear I1;
+        I1=img3;        
     end     
 
 
+    outImg=I1;
 
 
 end

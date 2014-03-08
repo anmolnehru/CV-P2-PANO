@@ -1,7 +1,7 @@
-function [] = PanoramaMain(inDir, f, SIFT_thresh, printCyl, doSIFT_Test)
+function [] = PanoramaMain(inDir, f, SIFT_thresh, printVerbose, doSIFT_Test)
     
     DO_FLAG=doSIFT_Test;
-    DO_PRINT_IMG=printCyl;
+    DO_PRINT_IMG=printVerbose;
     startup;
     srgStartup;
     warning('off','all');
@@ -20,7 +20,7 @@ function [] = PanoramaMain(inDir, f, SIFT_thresh, printCyl, doSIFT_Test)
             count=count+1;
             inFilename = strcat(inDir,srcFiles(i).name);            
             display(strcat(datestr(now,'HH:MM:SS'),' [INFO] ', ...
-                ' Processing file>',inFilename));            
+                ' Processing file >>> ',inFilename));            
             I = imread(inFilename);            
             NewI = convertToCylindrical(I,f);
             outFilename=strcat(outDir,'/cy_',srcFiles(i).name);  
@@ -35,7 +35,7 @@ function [] = PanoramaMain(inDir, f, SIFT_thresh, printCyl, doSIFT_Test)
             
             if(DO_PRINT_IMG==1)                       
                 display(strcat(datestr(now,'HH:MM:SS'),' [INFO] ', ...
-                    ' Creating file>',outFilename));  
+                    ' Creating file >>> ',outFilename));  
                 NewI=cropImg(NewI);
                 imwrite(NewI,outFilename);
             end
@@ -45,9 +45,11 @@ function [] = PanoramaMain(inDir, f, SIFT_thresh, printCyl, doSIFT_Test)
     if(DO_FLAG==1)   
         SiftTest( pixArray, SIFT_thresh, outDir);                    
     end   
-    
+            
+    display(strcat(datestr(now,'HH:MM:SS'),' [INFO] ', ...
+        ' Creating simple panorama using translation >>>',inFilename));  
     simpleStitchedImg=createSimpleStitch(pixArray,SIFT_thresh,outDir);
-    imshow(simpleStitchedImg);
+    imwrite(simpleStitchedImg,strcat(outDir,'/panoram.jpg'));
     
 %     stitchedImg = CreateStitchedImage(pixArray,outDir);
 %     imshow(stitchedImg);

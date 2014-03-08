@@ -10,7 +10,7 @@ n = 4;
 epsilon = 5;
 smallP = 0.3;
 direction = 2;
-type = 5;
+type = 1;
 
 imgrows = size(pixarray,2);
 imgcols = size(pixarray,3);

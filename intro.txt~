@@ -1,0 +1,14 @@
+INTRO
+
+For this project, we took a series of images from a Canon A640 camera as well as an iPhone 5 camera and converted them into panoramas.  Our process for converting the images into panoramas was the following:
+	1) Warp each image into cylindrical coordinates (cropping the pictures where necessary)
+	2) Use a feature based translational motion method to compute the alignment of each image relative to its subsequent partner image.  We found SIFT features for each of the images and then used the RANSAC method as well as an average vector translation method in order to estimate a homography between each image pair.  We also expanded on the standard RANSAC method with some variations in order to utilize better epsilon and n parameters.
+	3) Blend neighboring images together using the feather blending technique.  
+	4) Use a linear warp to remove vertical space between the first and last image, and then crop out surrounding black pixels as well as horizontal extents to match the left and right ends of the panorama.
+
+Extensions
+	1) Average Vector Translation
+	2) Cell phone images
+	3) Barrage of RANSAC methods
+	4) POTENTIALLY PYRAMID BLENDING
+

@@ -4,9 +4,9 @@ function [ newPanorama ] = VerticallyAdjustPanorama(panorama, pixelFirstTopLeft,
 
 leftMargin=pixelMidTopLeft(2);
 topMargin=0;
-rightMargin= midpointOther(2) - pixelMidTopLeft(2);
-bottomMargin=size(panorama,1);
-panorama = imcrop(panorama, [leftMargin topMargin rightMargin bottomMargin]);
+width= midpointOther(2) - pixelMidTopLeft(2);
+height=size(panorama,1);
+panorama = imcrop(panorama, [leftMargin topMargin width height]);
 
 theA = (pixelFirstTopLeft(1) - topLeftOther(1)) / topLeftOther(2);
 newPanorama = zeros(size(panorama,1) ,size(panorama,2), 3);
@@ -24,18 +24,8 @@ end
 newPanorama = uint8(newPanorama);
 
 newPanorama = cropImg(newPanorama);
-newPanorama = CropVertical(newPanorama);
+newPanorama = CropFromMiddleVertical(newPanorama, topLeftOther(1) + theA * topLeftOther(2));
 
-%Linear interpolation
-
-for j = 15:size(newPanorama,2) - 10
-    for i = 15:size(newPanorama,1) - 10
-        if (isequal(newPanorama(i,j,:),zeros(1,1,3)))
-            newPanorama(i,j,:) = (double(newPanorama(i + 2,j,:)) + ...
-                double(newPanorama( i - 2,j,:)) + double(newPanorama(i,j + 2,:)) + ...
-                double(newPanorama(i, j - 2,:))) / 4.0;
-        end
-    end
-end
+newPanorama = InterpolateImage(newPanorama);
 
 end

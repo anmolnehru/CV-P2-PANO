@@ -1,4 +1,4 @@
-function [ panorama ] = CreateStitchedImage(pixarray, outDir)
+function [ newPanorama ] = CreateStitchedImage(pixarray, outDir, ransactype)
 %UNTITLED Summary of this function goes here
 %   pixarray - 4d pixel array
 %   type - integer which represents which ransac function to call: 1 if
@@ -7,8 +7,11 @@ function [ panorama ] = CreateStitchedImage(pixarray, outDir)
 
 n = 4;
 epsilon = 5;
-smallP = 0.2;
-type = 1;
+smallP = 0.1;
+type = ransactype;
+if (type < 1 || type > 5)
+    type = 1;
+end
 
 imgrows = size(pixarray,2);
 imgcols = size(pixarray,3);
@@ -16,7 +19,7 @@ imgcols = size(pixarray,3);
 mkdir(outDir);
 
 panorama = cropImg(reshape(pixarray(1,:,:,:),imgrows,imgcols,3));
-%find pixel in top left
+%keep track of pixel in top left and middle of left image
 pixelFirstTopLeft = [1 1 1];
 pixelMidTopLeft = [size(panorama,1) / 2, size(panorama,2) / 2, 1];
 
@@ -36,10 +39,6 @@ for i = 2:size(pixarray,1)
     end
     [panorama, topLeftOther, pixelFirstTopLeft, midpointOther, pixelMidTopLeft] = CombineImages(currimg, panorama, h, pixelFirstTopLeft, pixelMidTopLeft);
     imwrite(panorama, strcat(outDir, '/PANO_', num2str(i), '.jpg'));
-%     display(pixelFirstTopLeft);
-%     display(pixelMidTopLeft);
-%     display(pixelMidTopLeft);
-%     display(midpointOther);
 end
 
 newPanorama = VerticallyAdjustPanorama(panorama, pixelFirstTopLeft, topLeftOther, pixelMidTopLeft, midpointOther);

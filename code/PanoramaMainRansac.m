@@ -6,7 +6,7 @@ function [stitchedImg] = PanoramaMainRansac(inDir, f, ransactype)
     %srgStartup;
     warning('off','all');
     outDir=strcat(inDir,'PANO_',datestr(now,'mmddyyyy_HHMMSSFFF'));
-    mkdir(outDir);
+    %mkdir(outDir);
     display(strcat(datestr(now,'HH:MM:SS'),' [INFO] ', ...
         ' Output dir created at ',outDir));
     
@@ -123,11 +123,12 @@ function [stitchedImg] = PanoramaMainRansac(inDir, f, ransactype)
         end               
     end   
     
-    for i = 1:5
-        currOutDir = strcat(outDir, '_ransactype', num2str(i));
-        stitchedImg  = CreateStitchedImage(pixArray,currOutDir, i);
-    end
-    
-%     stitchedImg  = CreateStitchedImage(pixArray,outDir, ransactype);
-%     imshow(stitchedImg);
+%     for i = 1:5
+%         currOutDir = strcat(outDir, '_ransactype', num2str(i));
+%         stitchedImg  = CreateStitchedImage(pixArray,currOutDir, i);
+%     end
+
+    currOutDir = strcat(outDir, '_ransactype', num2str(ransactype));
+    stitchedImg  = CreateStitchedImage(pixArray,currOutDir, ransactype);
+    imshow(stitchedImg);
 end

@@ -6,9 +6,9 @@ For this project, we took a series of images from a Canon A640 camera as well as
 	3) Blend neighboring images together using the feather blending technique.  
 	4) Use a linear warp to remove vertical space between the first and last image, and then crop out surrounding black pixels as well as horizontal extents to match the left and right ends of the panorama.
 
-Extensions
-	1) Average Vector Translation
-	2) Cell phone images
-	3) Barrage of RANSAC methods
-	4) POTENTIALLY PYRAMID BLENDING
+Extensions and Short Summary of Findings
+	1) Average Vector Translation: The average vector translation method consisted of first finding SIFT features for a pair of images.  Then, our algorithm throws out features that are unlikely to be in the overlap region.  Finally, it takes an average of the distance for each SIFT match and stitches the images together by shifting 1 image by that average amount.  This yielded very good results that were oftentimes better than the standard RANSAC/homography method, but part of that finding may be due to our images being taken with a steady camera frame.
+	2) Cell phone images: We tested our algorithms on images taken from an iPhone 5 camera.  Our simple average vector translation actually yielded very good results for these images HYPERLINK TO THOSE IMAGES.
+	3) Variation of RANSAC methods: In addition to implementing the standard RANSAC algorithm, we also expanded upon it with some variations in order to utilize better epsilon and n parameters.  One issue with the standard RANSAC algorithm is finding appropriate epsilon and n values for each set of images.  Rather than having to test different epsilons and n values for each set of images, we used a few different heuristics to attempt to use appropriate epsilon and n parameters for any arbitrary set of images.
+	4) Pyramid blending: We based our code off of LINK TO CODE HERE?.  For this blending, we 
 

@@ -24,7 +24,7 @@ $("#includedContent").load("content.html");
 	<tr align=center>
 		<td colspan=2>
 			<font color="#58FAF4">
-			<h1><b>CS 766 Computer Vision Assignment 1: High Dynamic Range (HDR)</b></h1>
+			<h1><b>CS 766 Computer Vision Assignment 2: Panorama & Mosaics</b></h1>
 			</font>
 			<font color="#FFFFFF">			
 			<i>Saikat R. Gomes (<a href="mailto=saikat@cs.wisc.edu">saikat@cs.wisc.edu</a>) & Stephen Lazzaro (<a href="mailto=slazzaro@cs.wisc.edu">slazzaro@cs.wisc.edu</a>)</i>
@@ -45,27 +45,37 @@ $("#includedContent").load("content.html");
 			<font color="ffffff">
 <h2> <center> Introduction </center> </h2>
 
-In simple terms, HDR imaging consists of taking a series of images of a static scene at varying exposures, and merging the best portions of each image in order to maximize the dynamic range for a photo of the scene.  In order to construct HDR images, we implemented the algorithm that Debevec and Malik (1997) introduced along with the tone mapping algorithm described by Reinhard et. al.  We also implemented Ward's alignment algorithm in order to handle the common problem of misaligned photos. 
+For this project, we took a series of images from a Canon A640 camera as well as an iPhone 5 camera and converted them into panoramas.  Our process for converting the images into panoramas was the following:
+	<ul>
+	<li> Warp each image into cylindrical coordinates (cropping the pictures where necessary) </li>
+	<li> Use a feature based translational motion method to compute the alignment of each image relative to its subsequent partner image.  We found SIFT features for each of the images and then used the RANSAC method as well as an average vector translation method in order to estimate a homography between each image pair.  We also expanded on the standard RANSAC method with some variations in order to utilize better epsilon and n parameters. </li>
+	<li> Blend neighboring images together using the feather blending technique.  </li>
+	<li> Use a linear warp to remove vertical space between the first and last image, and then crop out surrounding black pixels as well as horizontal extents to match the left and right ends of the panorama. </li>
+	</ul>
+
 <br><br> 
-<center>Some Of Findings</center>
+<center>Extensions and Short Summary of Findings</center>
 
 <ol> 
 <li>
-We compared HDR images that we produced with those standard methods to what we call naive pixel averaging images, which are constructed by taking the average value of each pixel from all of the images used for HDR.  As expected we found that the naive method did not contain a high range of colors even though most of the times they were more visually appealing to the eye that the input images.
+<b>Average Vector Translation:</b> The average vector translation method consisted of first finding SIFT features for a pair of images.  Then, our algorithm throws out features that are unlikely to be in the overlap region.  Finally, it takes an average of the distance for each SIFT match and stitches the images together by shifting 1 image by that average amount.  This yielded very good results that were oftentimes better than the standard RANSAC/homography method, but part of that finding may be due to our images being taken with a steady camera frame.
 </li>
 <br>
 <li>
-We also experiment with different tone mapping algorithms.  We compared images between Matlab's tone mapping algorithm, and our implementations of Reinhard et al.'s local algorithm, and Reinhard et al.'s global algorithm.  We found that Matlab's tone mapping generally gave better results than the Reinhard tone mapping algorithms.  However, at times, Reinhard's tone mapping algorithm gave a much more realistic looking image than that of Matlab.
+<b>Cell phone images:</b> We tested our algorithms on images taken from an iPhone 5 camera.  Our simple average vector translation actually yielded very good results for these images HYPERLINK TO THOSE IMAGES.
 </li>
 <br>
 <li>
-We discovered that using Ward's algorithm gave much better results when we put the images through an edge filter beforehand (we used the Prewitt edge filter).  Without using the edge filter, there was much more noise and the algorithm would return much larger faulty shifts for images. 
+<b>Variation of RANSAC methods:</b> In addition to implementing the standard RANSAC algorithm, we also expanded upon it with some variations in order to utilize better epsilon and n parameters.  One issue with the standard RANSAC algorithm is finding appropriate epsilon and n values for each set of images.  Rather than having to test different epsilons and n values for each set of images, we used a few different heuristics to attempt to use appropriate epsilon and n parameters for any arbitrary set of images.
+</li>
+<li>
+<b>Pyramid blending:</b> We based our code off of LINK TO CODE HERE?.  For this blending, we...SAIKAT ADD IN STUFF HERE
 </li>
 </ol>
 </br>
 </br>
  
-<h3>Our Image (*.jpg and *.hdr) for submission can be found <a href="../Vote">here<a></h3>
+<h3>Our Image (*.jpg) for submission can be found <a href="../Vote">here<a></h3>
 
 
 

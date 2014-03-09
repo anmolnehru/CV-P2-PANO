@@ -10,8 +10,8 @@ Contents
     <li><a href="imgAcc.html">Image Acquisition</a></li>
     <li><a href="cc.html">Cylindrical Coordinates</a></li>
     <li><a href="sift.html">SIFT Feature detection</a></li>
-    <li><a href="ransac.html">Ransac Translation</a></li>
-    <li><a href="homographies.html">Homographies</a></li>
+    <li><a href="ransac.html">RANSAC</a></li>
+    <!--<li><a href="homographies.html">Homographies</a></li> -->
     <li><a href="transalation.html">Stitching: Translastion</a></li>
     <li><a href="perspective.html">Stitching: Perspective</a></li>
     <li><a href="blending.html">Image Blending</a></li>
@@ -20,7 +20,7 @@ Contents
 	  <ol type="1">
 	    <li><a href="results1.html">Monona Terrace</a></li>
 	    <li><a href="results2.html">University</a></li>
-	    <li><a href="results4.html">CS Lobby (iPhone)</a></li>
+	    <li><a href="results3.html">CS Lobby (iPhone)</a></li>
 	  </ol>
   <li><a href="dataset.html">Datasets</a></li>
   <li><a href="code.html">Code</a></li>

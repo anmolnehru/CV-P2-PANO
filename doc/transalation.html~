@@ -102,7 +102,7 @@ $("#includedContent").load("content.html");
 			<img src="img/trans/pairJoin_8.jpg"  height=150>
 		</td>
 	</tr>
-	<tr align=center>
+	<tr align=left>
 		<td >
 			<img src="img/trans/stitch_9.jpg"  height=150>
 		</td>

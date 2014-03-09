@@ -6,7 +6,7 @@
 		padding: 0;
 	}
 	.myPano {
-		background-image: url(img/panC2.jpg);
+		background-image: url(img/panC3.jpg);
 		height: 388px;
 		cursor: move;
 	}
@@ -78,9 +78,9 @@ $("#includedContent").load("content.html");
 	<tr align=center>
 		<td colspan=2>
 			<hr>
-			<img src="img/pan2.jpg"  width=1300>
+			<img src="img/pan3.jpg"  width=1300>
 			<hr>
-			<img src="img/panC2.jpg"  width=1300>
+			<img src="img/panC3.jpg"  width=1300>
 			<hr>
 		</td>
 

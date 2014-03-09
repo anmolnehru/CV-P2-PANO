@@ -40,16 +40,21 @@ $("#includedContent").load("content.html");
 		<td width='315' alight=left valign=top>
 			<div id="includedContent"></div>
 		</td>
-		<td align=left valign=up>
+		<td align=left >
 	<!-- #### DISPLAY AREA ### -->
 			<font color="ffffff">
 <h2><center>Image Acquisition</center></h2>
 <center>
-The images were take with a Canon A640 (tag 4726208879) camera, Kaidan head and tripod.</br></br>
+The images were taken with a Canon A640 (tag 4726208879) camera, Kaidan head and tripod.</br></br>
 </center>
+<center><img src="http://whatdigitalcamera.media.ipcdigital.co.uk/11133/000001170/57d4/Canon-A640multiview.jpg" height='300'></center>
 
-<center><img src="http://whatdigitalcamera.media.ipcdigital.co.uk/11133/000001170/57d4/Canon-A640multiview.jpg" height='500'></center>
- 
+<br>
+<br>
+<center>
+We also took some images with an iPhone 5.</br></br>
+</center>
+ <center><img src="img/iphone5.jpeg" height='300'></center>
 
 
 

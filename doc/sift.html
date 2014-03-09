@@ -24,7 +24,7 @@ $("#includedContent").load("content.html");
 	<tr align=center>
 		<td colspan=2>
 			<font color="#58FAF4">
-			<h1><b>CS 766 Computer Vision Assignment 1: High Dynamic Range (HDR)</b></h1>
+			<h1><b>CS 766 Computer Vision Assignment 2: Panorama & Mosaics</b></h1>
 			</font>
 			<font color="#FFFFFF">			
 			<i>Saikat R. Gomes (<a href="mailto=saikat@cs.wisc.edu">saikat@cs.wisc.edu</a>) & Stephen Lazzaro (<a href="mailto=slazzaro@cs.wisc.edu">slazzaro@cs.wisc.edu</a>)</i>
@@ -44,8 +44,14 @@ $("#includedContent").load("content.html");
 	<!-- #### DISPLAY AREA ### -->
 			<font color="ffffff">
 <center> 
-<h2>Image Stitching: Simple Translations </h2>
+<h2>SIFT Features</h2>
+</center>
 
+In order to find SIFT features for our images, we used the VLFeat toolbox for Matlab.  This toolbox made finding SIFT features extremely simple as all we needed to use was the vl_sift method to find the sift features for each image and then the vl_ubcmatch method to find matching sifts for two images.  Below is an image of some SIFT features that we received for one of our images.
+<br>
+<br>
+
+<center>
 <img src="img/sift.jpg" >
 </center>
 

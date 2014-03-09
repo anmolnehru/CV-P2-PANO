@@ -80,8 +80,8 @@ $("#includedContent").load("content.html");
 			<hr>
 			<img src="img/pan1.jpg"  width=1300>
 			<hr>
-			<hr>
 			<img src="img/panC1.jpg"  width=1300>
+			<hr>
 		</td>
 
 	<tr>

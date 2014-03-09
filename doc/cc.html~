@@ -24,7 +24,7 @@ $("#includedContent").load("content.html");
 	<tr align=center>
 		<td colspan=2>
 			<font color="#58FAF4">
-			<h1><b>CS 766 Computer Vision Assignment 1: High Dynamic Range (HDR)</b></h1>
+			<h1><b>CS 766 Computer Vision Assignment 2: Panorama & Mosaics</b></h1>
 			</font>
 			<font color="#FFFFFF">			
 			<i>Saikat R. Gomes (<a href="mailto=saikat@cs.wisc.edu">saikat@cs.wisc.edu</a>) & Stephen Lazzaro (<a href="mailto=slazzaro@cs.wisc.edu">slazzaro@cs.wisc.edu</a>)</i>
@@ -44,18 +44,36 @@ $("#includedContent").load("content.html");
 	<!-- #### DISPLAY AREA ### -->
 			<font color="ffffff">
 <center> 
-<h2>Image Stitching: Simple Translations </h2>
+<h2>Cylindrical Coordinates </h2>
+</center>
 
+<br>
+First, we warped our images into cylindrical coordinates using the following two equations:
+<br><br>
+	<center>theta  =  arctan(x / f);</center>
+	<center>h  =  y / sqrt(x^2 + f^2);</center>
+<br>
+In the above equations, f is the focal length, x is the x coordinate of the 2-d image representation, and y is the y coordinate of the 2-d image representation.  This gave us a cylindrical coordinate for each of our x,y positions in our images.  After this conversion, we warped our images back into cylindrical image coordinates using the following equations.
+<br>
+	<center>new_x  =  f * theta + x_center;</center>
+	<center>new_y  =  f * h + y_center;</center>
+<br>
+In the above equations, the terms x_center and y_center represent the center of the unwrapped cylinder for the cylindrical coordinates.  We used these new_x and new_y values to recreate our original images as cylindrical images.  Below, we show our original image (left) and its cylindrical image representation (right).
+<br>
+<br>
+<br>
+
+<center>
 <table>
 	<tr>
 		<td>	
-			<img src="img/cyl/IMG_1387.JPG" height=300>
+			<img src="img/cyl/IMG_1387.JPG" height=350>
 		</td>
 		<td>			
 			<img src="http://i.stack.imgur.com/7adXU.jpg">
 		</td>
 		<td>	
-			<img src="img/cyl/cy_4.JPG" height=300>
+			<img src="img/cyl/cy_4.JPG" height=350>
 		</td>
 	</tr>	
 </table>

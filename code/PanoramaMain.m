@@ -48,8 +48,9 @@ function [] = PanoramaMain(inDir, f, SIFT_thresh, printVerbose, doSIFT_Test)
             
     display(strcat(datestr(now,'HH:MM:SS'),' [INFO] ', ...
         ' Creating simple panorama using translation >>>',inFilename));  
-    simpleStitchedImg=createSimpleStitch(pixArray,SIFT_thresh,outDir);
+    [simpleStitchedImg,simImgCorrected]=createSimpleStitch(pixArray,SIFT_thresh,outDir);
     imwrite(simpleStitchedImg,strcat(outDir,'/panoram.jpg'));
+    imwrite(simImgCorrected,strcat(outDir,'/panoramCorrected.jpg'));
     
 %     stitchedImg = CreateStitchedImage(pixArray,outDir);
 %     imshow(stitchedImg);

@@ -129,23 +129,26 @@ function [ outImg, outImgCorrected ] = createSimpleStitch( pixArray,SIFT_thresh,
                   y_plus = 0;
               end
               
-              if(j<x_t)
-                  w1=x_t-j;
-                  w2=j;
-                  w=w1+w2;
-                  
-                  for k=1:3
-                      rgb1=double(I1_ori(i+y_plus,j+size(I1_ori,2)-x_t,k));
-                      rgb2=double(I2_ori(i,j,k));                        
-                      rgb1=double(w1*rgb1);
-                      rgb2=double(w2*rgb2) ;    
-                      rgb=(rgb1+rgb2)/w;                      
-                      img3(i+y_plus,j+size(I1_ori,2)-x_t,k)=uint8(rgb);                      
-                  end
-                                  
-              else             
-                img3(i+y_plus,j+size(I1_ori,2)-x_t,:)=I2_ori(i,j,:);              
-              end
+% % % %               if(j<x_t)
+% % % %                   w1=x_t-j;
+% % % %                   w2=j;
+% % % %                   w=w1+w2;
+% % % %                   
+% % % %                   for k=1:3
+% % % %                       rgb1=double(I1_ori(i+y_plus,j+size(I1_ori,2)-x_t,k));
+% % % %                       rgb2=double(I2_ori(i,j,k));                        
+% % % %                       rgb1=double(w1*rgb1);
+% % % %                       rgb2=double(w2*rgb2) ;    
+% % % %                       rgb=(rgb1+rgb2)/w;                      
+% % % %                       img3(i+y_plus,j+size(I1_ori,2)-x_t,k)=uint8(rgb);                      
+% % % %                   end
+% % % %                                   
+% % % %               else             
+% % % %                 img3(i+y_plus,j+size(I1_ori,2)-x_t,:)=I2_ori(i,j,:);              
+% % % %               end
+
+            img3(i+y_plus,j+size(I1_ori,2)-x_t,:)=I2_ori(i,j,:);
+
            end
         end    
         

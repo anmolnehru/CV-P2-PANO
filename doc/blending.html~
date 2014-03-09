@@ -1,0 +1,120 @@
+<html>
+<head>
+
+<style>
+	html, body {
+		margin: 0;
+		padding: 0;
+	}
+	.myPano1 {
+		background-image: url(img/nonBlend/1.jpg);
+		height: 515px;
+		cursor: move;
+	}
+	.myPano2 {
+		background-image: url(img/nonBlend/2.jpg);
+		height: 423px;
+		cursor: move;
+	}
+	.myPano3 {
+		background-image: url(img/nonBlend/3.jpg);
+		height: 388px;
+		cursor: move;
+	}
+</style>
+
+</head>
+
+<!-- INTRO -->
+
+<body bgcolor="#000000" link="#C0C0C0" vlink="#808080" alink="#FF0000">
+
+
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="jquery.js"></script> 
+<!--http://kaioa.com/k/test/cyclotron/index.html-->
+<script type="text/javascript"  src="js/jquery.panoViewer.js"></script>
+
+
+<script>
+$(document).ready(function ($) {
+	$('.myPano1').panoViewer();
+});
+</script>
+<script>
+$(document).ready(function ($) {
+	$('.myPano2').panoViewer();
+});
+</script>
+<script>
+$(document).ready(function ($) {
+	$('.myPano3').panoViewer();
+});
+</script>
+
+<script> 
+$(function(){
+$("#includedContent").load("content.html"); 
+});
+</script> 
+
+<center>
+<table width=1300 >
+	<tr align=center>
+		<td colspan=2>
+			<font color="#58FAF4">
+			<h1><b>CS 766 Computer Vision Assignment 1: High Dynamic Range (HDR)</b></h1>
+			</font>
+			<font color="#FFFFFF">			
+			<i>Saikat R. Gomes (<a href="mailto=saikat@cs.wisc.edu">saikat@cs.wisc.edu</a>) & Stephen Lazzaro (<a href="mailto=slazzaro@cs.wisc.edu">slazzaro@cs.wisc.edu</a>)</i>
+			</font>
+		</td>
+	</tr>
+	<tr>
+		<td colspan=2>
+			<hr>
+		</td>
+	</tr>
+	<tr>
+		<td width='315' alight=left valign=top>
+			<div id="includedContent"></div>
+		</td>
+		<td align=left>
+	<!-- #### DISPLAY AREA ### -->
+			<font color="ffffff">
+
+			
+			<hr>
+			<img src="img/nonBlend/1.jpg"  width=985><br>
+			<img src="img/panC1.jpg"  width=985><br>
+			<hr>
+			<img src="img/nonBlend/2.jpg"  width=985><br>
+			<img src="img/panC2.jpg"  width=985><br>
+			<hr>
+			<img src="img/nonBlend/3.jpg"  width=985><br>
+			<img src="img/panC3.jpg"  width=985><br>
+			<hr>
+
+
+
+			</font>
+	<!-- #### DISPLAY AREA ### -->			
+		</td>
+	</tr>
+	<tr align=center>
+		<td colspan=2>
+			<hr><div class="myPano1"></div>
+			<hr>
+			<hr><div class="myPano2"></div>
+			<hr>
+			<hr><div class="myPano3"></div>
+			<hr>
+		</td>
+
+	<tr>
+
+</table>
+</center>
+<body>
+</html>

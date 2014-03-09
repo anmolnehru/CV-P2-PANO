@@ -1,0 +1,92 @@
+<html>
+<head>
+<style>
+	html, body {
+		margin: 0;
+		padding: 0;
+	}
+	.myPano {
+		background-image: url(img/panC1.jpg);
+		height: 518px;
+		cursor: move;
+	}
+</style>
+
+</head>
+
+<!-- INTRO -->
+
+<body bgcolor="#000000" link="#C0C0C0" vlink="#808080" alink="#FF0000">
+
+
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="jquery.js"></script> 
+<!--http://kaioa.com/k/test/cyclotron/index.html-->
+<script type="text/javascript"  src="js/jquery.panoViewer.js"></script>
+
+
+<script>
+$(document).ready(function ($) {
+	$('.myPano').panoViewer();
+});
+</script>
+
+<script> 
+$(function(){
+$("#includedContent").load("content.html"); 
+});
+</script> 
+
+<center>
+<table width=1300 >
+	<tr align=center>
+		<td colspan=2>
+			<font color="#58FAF4">
+			<h1><b>CS 766 Computer Vision Assignment 1: High Dynamic Range (HDR)</b></h1>
+			</font>
+			<font color="#FFFFFF">			
+			<i>Saikat R. Gomes (<a href="mailto=saikat@cs.wisc.edu">saikat@cs.wisc.edu</a>) & Stephen Lazzaro (<a href="mailto=slazzaro@cs.wisc.edu">slazzaro@cs.wisc.edu</a>)</i>
+			</font>
+		</td>
+	</tr>
+	<tr>
+		<td colspan=2>
+			<hr>
+		</td>
+	</tr>
+	<tr>
+		<td width='315' alight=left valign=top>
+			<div id="includedContent"></div>
+		</td>
+		<td align=left>
+	<!-- #### DISPLAY AREA ### -->
+			<font color="ffffff">
+<div class="myPano"></div>
+<font color="#ffffff" size="1.5">	
+<center>
+<i>Drag the above image (left/right) to view the entire panorama mosaic</i>
+</center>
+</font>
+
+
+
+			</font>
+	<!-- #### DISPLAY AREA ### -->			
+		</td>
+	</tr>
+	<tr align=center>
+		<td colspan=2>
+			<hr>
+			<img src="img/pan1.jpg"  width=1300>
+			<hr>
+			<hr>
+			<img src="img/panC1.jpg"  width=1300>
+		</td>
+
+	<tr>
+
+</table>
+</center>
+<body>
+</html>

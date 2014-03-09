@@ -1,5 +1,28 @@
 <html>
 <head>
+
+<style>
+	html, body {
+		margin: 0;
+		padding: 0;
+	}
+	.myPano1 {
+		background-image: url(img/nonBlend/1.jpg);
+		height: 515px;
+		cursor: move;
+	}
+	.myPano2 {
+		background-image: url(img/nonBlend/2.jpg);
+		height: 423px;
+		cursor: move;
+	}
+	.myPano3 {
+		background-image: url(img/nonBlend/3.jpg);
+		height: 372px;
+		cursor: move;
+	}
+</style>
+
 </head>
 
 <!-- INTRO -->
@@ -12,6 +35,23 @@
 <script src="jquery.js"></script> 
 <!--http://kaioa.com/k/test/cyclotron/index.html-->
 <script type="text/javascript"  src="js/jquery.panoViewer.js"></script>
+
+
+<script>
+$(document).ready(function ($) {
+	$('.myPano1').panoViewer();
+});
+</script>
+<script>
+$(document).ready(function ($) {
+	$('.myPano2').panoViewer();
+});
+</script>
+<script>
+$(document).ready(function ($) {
+	$('.myPano3').panoViewer();
+});
+</script>
 
 <script> 
 $(function(){
@@ -43,8 +83,18 @@ $("#includedContent").load("content.html");
 		<td align=left>
 	<!-- #### DISPLAY AREA ### -->
 			<font color="ffffff">
-<h2><center> Image Stitching: Simple Translations </center></h2>
 
+			
+			<hr>
+			<img src="img/nonBlend/1.jpg"  width=985><br>
+			<img src="img/panC1.jpg"  width=985><br>
+			<hr>
+			<img src="img/nonBlend/2.jpg"  width=985><br>
+			<img src="img/panC2.jpg"  width=985><br>
+			<hr>
+			<img src="img/nonBlend/3.jpg"  width=985><br>
+			<img src="img/panC3.jpg"  width=985><br>
+			<hr>
 
 
 
@@ -54,8 +104,11 @@ $("#includedContent").load("content.html");
 	</tr>
 	<tr align=center>
 		<td colspan=2>
+			<hr><div class="myPano1"></div>
 			<hr>
-			<img src="img/demo_photo.jpg"  width=1300>
+			<hr><div class="myPano2"></div>
+			<hr>
+			<hr><div class="myPano3"></div>
 			<hr>
 		</td>
 

@@ -166,9 +166,19 @@ function [ outImg, outImgCorrected ] = createSimpleStitch( pixArray,SIFT_thresh,
     y_disp
     
     
+    if(y_disp<0)
+       start= size(I1,1);
+       ending=1;
+       step=-1;
+    else        
+       start=1;
+       ending=size(I1,1);
+       step=1;
+    end
     
     for c=col1:size(I1,2)-col1
-       for r=1:size(I1,1)
+       %for r=1:size(I1,1)
+       for r=start:step:ending
            w=double(c/(size(I1,2)-2*col1));
            rise = round(double(y_disp*w));
            if (rise==0||r-rise<=0||r-rise>size(I1,1))

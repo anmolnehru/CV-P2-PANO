@@ -7,8 +7,8 @@
 		padding: 0;
 	}
 	.myPano {
-		background-image: url(doc/img/demo_photo.jpg);
-		height: 547px;
+		background-image: url(doc/img/demo_photo3.jpg);
+		height: 497px;
 		cursor: move;
 	}
 </style>
@@ -62,13 +62,13 @@ $(document).ready(function ($) {
 			  <li><a href="doc/implement.html">Implementation</a></li>
 			  <ol type="1">
 			    <li><a href="doc/imgAcc.html">Image Acquisition</a></li>
-			    <li><a href="doc/simple.html">Cylindrical Coordinates</a></li>
-			    <li><a href="doc/simple.html">SIFT Feature detection</a></li>
-			    <li><a href="doc/rc.html">Ransac Translation</a></li>
-			    <li><a href="doc/tonemap.html">Homographies</a></li>
-			    <li><a href="doc/rgtm.html">Stitching: Translastion</a></li>
-			    <li><a href="doc/wards.html">Stitching: Perspective</a></li>
-			    <li><a href="doc/wards.html">Image Blending</a></li>
+			    <li><a href="doc/cc.html">Cylindrical Coordinates</a></li>
+			    <li><a href="doc/sift.html">SIFT Feature detection</a></li>
+			    <li><a href="doc/ransac.html">Ransac Translation</a></li>
+			    <li><a href="doc/homographies.html">Homographies</a></li>
+			    <li><a href="doc/transalation.html">Stitching: Translastion</a></li>
+			    <li><a href="doc/perspective.html">Stitching: Perspective</a></li>
+			    <li><a href="doc/blending.html">Image Blending</a></li>
 			  </ol>
 			  <li><a href="doc/results.html">Results</a></li>
 			  <ol type="1">

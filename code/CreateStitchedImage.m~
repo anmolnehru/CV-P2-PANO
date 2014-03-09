@@ -7,7 +7,7 @@ function [ panorama ] = CreateStitchedImage(pixarray, outDir)
 
 n = 4;
 epsilon = 5;
-smallP = 0.2;
+smallP = 0.4;
 type = 1;
 
 imgrows = size(pixarray,2);
@@ -36,10 +36,8 @@ for i = 2:size(pixarray,1)
     end
     [panorama, topLeftOther, pixelFirstTopLeft, midpointOther, pixelMidTopLeft] = CombineImages(currimg, panorama, h, pixelFirstTopLeft, pixelMidTopLeft);
     imwrite(panorama, strcat(outDir, '/PANO_', num2str(i), '.jpg'));
-%     display(pixelFirstTopLeft);
-%     display(pixelMidTopLeft);
-%     display(pixelMidTopLeft);
-%     display(midpointOther);
+    display(pixelMidTopLeft);
+    display(midpointOther);
 end
 
 newPanorama = VerticallyAdjustPanorama(panorama, pixelFirstTopLeft, topLeftOther, pixelMidTopLeft, midpointOther);

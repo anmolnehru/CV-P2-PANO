@@ -22,6 +22,39 @@ gray2 = GetGrayImageFrom3DArray(img2);
 %in 1st sift feature array and 2nd row represents its matching column in
 %2nd sift feature array
 matcharr = vl_ubcmatch(d1, d2, threshold);
+display(strcat('Number of matches: ', num2str(size(matcharr,2))));
+
+%Remove matches that are outside of bounds of smaller image columns(this
+%will fix any problem with blending in the same image at the beginning and
+%end)
+minColSize = size(img1,2);
+if (size(img2,2) < minColSize)
+    minColSize = size(img2,2);
+end
+
+MAX_OVERLAP_X = minColSize;
+
+colNewMatches = 1;
+newMatchesArr = zeros(2, size(matcharr,2));
+for i=1:size(matcharr,2)
+    i1=matcharr(1,i);
+    i2=matcharr(2,i);
+
+    %x1=sift1(1,i1);
+    x2=sift2(1,i2);
+
+    if(x2 < size(img2, 2) - MAX_OVERLAP_X)
+        continue;
+    end
+    % within regions wanted
+    newMatchesArr(1,colNewMatches) = i1;
+    newMatchesArr(2,colNewMatches) = i2;
+    colNewMatches = colNewMatches + 1;
+end
+
+matcharr = newMatchesArr(:, 1:(colNewMatches - 1));
+
+display(strcat('Number of matches: ', num2str(size(matcharr,2))));
 
 display(strcat('Number of matches: ', num2str(size(matcharr,2))));
 

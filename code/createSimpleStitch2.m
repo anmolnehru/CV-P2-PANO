@@ -117,42 +117,38 @@ function [ outImg, outImgCorrected ] = createSimpleStitch( pixArray,SIFT_thresh,
         img3=zeros(size(I1_ori,1),size(I1_ori,2)+size(I2_ori,2)-x_t,3);
         
         for i=1:size(I1_ori,1)
-            for j=1:size(
+            for j=1:size(I1_ori,2)
+                img3(i,j,:)=I1_ori(i,j,:);               
+            end
+        end
         
-        
-% % % % %         for i=1:size(I1_ori,1)
-% % % % %             for j=1:size(I1_ori,2)
-% % % % %                 img3(i,j,:)=I1_ori(i,j,:);               
-% % % % %             end
-% % % % %         end
-% % % % %         
-% % % % %         for i=1:size(I2_ori,1)
-% % % % %            for j=1:size(I2_ori,2)
-% % % % %               if(i+y_t<size(I2_ori,1)&&i+y_t>0)
-% % % % %                   y_plus = y_t;
-% % % % %               else
-% % % % %                   y_plus = 0;
-% % % % %               end
-% % % % %               
-% % % % %               if(j<x_t)
-% % % % %                   w1=x_t-j;
-% % % % %                   w2=j;
-% % % % %                   w=w1+w2;
-% % % % %                   
-% % % % %                   for k=1:3
-% % % % %                       rgb1=double(I1_ori(i+y_plus,j+size(I1_ori,2)-x_t,k));
-% % % % %                       rgb2=double(I2_ori(i,j,k));                        
-% % % % %                       rgb1=double(w1*rgb1);
-% % % % %                       rgb2=double(w2*rgb2) ;    
-% % % % %                       rgb=(rgb1+rgb2)/w;                      
-% % % % %                       img3(i+y_plus,j+size(I1_ori,2)-x_t,k)=uint8(rgb);                      
-% % % % %                   end
-% % % % %                                   
-% % % % %               else             
-% % % % %                 img3(i+y_plus,j+size(I1_ori,2)-x_t,:)=I2_ori(i,j,:);              
-% % % % %               end
-% % % % %            end
-% % % % %         end    
+        for i=1:size(I2_ori,1)
+           for j=1:size(I2_ori,2)
+              if(i+y_t<size(I2_ori,1)&&i+y_t>0)
+                  y_plus = y_t;
+              else
+                  y_plus = 0;
+              end
+              
+              if(j<x_t)
+                  w1=x_t-j;
+                  w2=j;
+                  w=w1+w2;
+                  
+                  for k=1:3
+                      rgb1=double(I1_ori(i+y_plus,j+size(I1_ori,2)-x_t,k));
+                      rgb2=double(I2_ori(i,j,k));                        
+                      rgb1=double(w1*rgb1);
+                      rgb2=double(w2*rgb2) ;    
+                      rgb=(rgb1+rgb2)/w;                      
+                      img3(i+y_plus,j+size(I1_ori,2)-x_t,k)=uint8(rgb);                      
+                  end
+                                  
+              else             
+                img3(i+y_plus,j+size(I1_ori,2)-x_t,:)=I2_ori(i,j,:);              
+              end
+           end
+        end    
         
         display('get p blend!');
         nz=figure;

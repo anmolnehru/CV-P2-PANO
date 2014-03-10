@@ -1,7 +1,8 @@
-function [] = PanoramaMain(inDir, f, SIFT_thresh, printVerbose, doSIFT_Test)
+function [] = PanoramaMain(inDir, f, SIFT_thresh, blend, printVerbose, doSIFT_Test)
     
     DO_FLAG=doSIFT_Test;
     DO_PRINT_IMG=printVerbose;
+    BLEND=blend;
     srgStartup;
     warning('off','all');
     outDir=strcat(inDir,'PANO_',datestr(now,'mmddyyyy_HHMMSSFFF'));
@@ -10,7 +11,7 @@ function [] = PanoramaMain(inDir, f, SIFT_thresh, printVerbose, doSIFT_Test)
         ' Output dir created at ',outDir));
     
     srcFiles = dir(strcat(inDir,'*.*'));     
-    [~,order] = sort_nat({srcFiles.name});
+    [~,order] = sortFiles({srcFiles.name});
     srcFiles = srcFiles(order);
     
     count=0;
@@ -47,7 +48,7 @@ function [] = PanoramaMain(inDir, f, SIFT_thresh, printVerbose, doSIFT_Test)
             
     display(strcat(datestr(now,'HH:MM:SS'),' [INFO] ', ...
         ' Creating simple panorama using translation >>>',inFilename));  
-    [simpleStitchedImg,simImgCorrected]=createSimpleStitch(pixArray,SIFT_thresh,outDir);
+    [simpleStitchedImg,simImgCorrected]=createSimpleStitch(pixArray,SIFT_thresh,BLEND,outDir);
     imwrite(simpleStitchedImg,strcat(outDir,'/panoram.jpg'));
     imwrite(simImgCorrected,strcat(outDir,'/panoramCorrected.jpg'));
     

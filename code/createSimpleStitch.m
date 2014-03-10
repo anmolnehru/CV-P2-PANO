@@ -1,7 +1,5 @@
-function [ outImg, outImgCorrected ] = createSimpleStitch( pixArray,SIFT_thresh, outDir )
+function [ outImg, outImgCorrected ] = createSimpleStitch( pixArray,SIFT_thresh,BLEND, outDir )
     
-    BLEND=0;
-
     for r=1:size(pixArray,2)
         for c=1:size(pixArray,3)
             I1(r,c,1)=pixArray(1,r,c,1);
@@ -168,7 +166,7 @@ function [ outImg, outImgCorrected ] = createSimpleStitch( pixArray,SIFT_thresh,
             I1_sub=imresize(I1_sub,[newR newC],'bicubic');
             I2_sub=imresize(I2_sub,[newR newC],'bicubic');
 
-            [pyrImg,feaImg]=pyrTest(I1_sub,I2_sub);     
+            pyrImg=pyramidBlend(I1_sub,I2_sub);     
 
             size(pyrImg,1);
             size(pyrImg,2);

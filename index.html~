@@ -8,7 +8,7 @@
 	}
 	.myPano {
 		background-image: url(doc/img/panC1.jpg);
-		height: 388px;
+		height: 518px;
 		cursor: move;
 	}
 </style>
@@ -59,21 +59,18 @@ $(document).ready(function ($) {
 			<ol type="0">
 			  <li>Home</li>
 			  <li><a href="doc/intro.html">Introduction<a></li>
-			  <li><a href="doc/implement.html">Implementation</a></li>
-			  <ol type="1">
 			    <li><a href="doc/imgAcc.html">Image Acquisition</a></li>
 			    <li><a href="doc/cc.html">Cylindrical Coordinates</a></li>
 			    <li><a href="doc/sift.html">SIFT Feature detection</a></li>
 			    <li><a href="doc/ransac.html">Ransac Translation</a></li>
-			    <li><a href="doc/homographies.html">Homographies</a></li>
 			    <li><a href="doc/transalation.html">Stitching: Translastion</a></li>
-			    <li><a href="doc/perspective.html">Stitching: Perspective</a></li>
 			    <li><a href="doc/blending.html">Image Blending</a></li>
-			  </ol>
-			  <li><a href="doc/results.html">Results</a></li>
+			  <li>Results</li>
 			  <ol type="1">
+			    <li><a href="doc/results1.html">Results 1</a></li>
 			    <li><a href="doc/results2.html">Results 1</a></li>
 			    <li><a href="doc/results3.html">Results 2</a></li>
+			    <li><a href="doc/results4.html">Results 4</a></li>
 			  </ol>
 			  <li><a href="doc/dataset.html">Datasets</a></li>
 			  <li><a href="doc/code.html">Code</a></li>

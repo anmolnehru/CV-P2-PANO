@@ -45,27 +45,24 @@ $("#includedContent").load("content.html");
 			</font>
 			</h2>
 			<ol type="0">
-			  <li>Home</li>
-			  <li><a href="doc/intro.html">Introduction<a></li>
-			  <li><a href="doc/implement.html">Implementation</a></li>
+			  <li><a href="../index.html">Home</a></li>
+			  <li><a href="intro.html">Introduction<a></li>
+			    <li><a href="imgAcc.html">Image Acquisition</a></li>
+			    <li><a href="cc.html">Cylindrical Coordinates</a></li>
+			    <li><a href="sift.html">SIFT Feature detection</a></li>
+			    <li><a href="ransac.html">Ransac Translation</a></li>
+			    <li><a href="transalation.html">Stitching: Translastion</a></li>
+			    <li><a href="blending.html">Image Blending</a></li>		  
+			  <li>Results</li>
 			  <ol type="1">
-			    <li><a href="doc/imgAcc.html">Image Acquisition</a></li>
-			    <li><a href="doc/cc.html">Cylindrical Coordinates</a></li>
-			    <li><a href="doc/sift.html">SIFT Feature detection</a></li>
-			    <li><a href="doc/ransac.html">Ransac Translation</a></li>
-			    <li><a href="doc/transalation.html">Stitching: Translastion</a></li>
-			    <li><a href="doc/perspective.html">Stitching: Perspective</a></li>
-			    <li><a href="doc/blending.html">Image Blending</a></li>
+			    <li><a href="results1.html">Monona Terrace</a></li>
+			    <li><a href="results2.html">University</a></li>
+			    <li><a href="results3.html">CS Lobby (iPhone)</a></li>
 			  </ol>
-			  <li><a href="doc/results.html">Results</a></li>
-			  <ol type="1">
-			    <li><a href="doc/results2.html">Results 1</a></li>
-			    <li><a href="doc/results3.html">Results 2</a></li>
-			  </ol>
-			  <li><a href="doc/dataset.html">Datasets</a></li>
-			  <li><a href="doc/code.html">Code</a></li>
+			  <li><a href="dataset.html">Datasets</a></li>
+			  <li><a href="code.html">Code</a></li>
 			  <li><a href="https://github.com/saikatgomes/CV-P2-PANO/commits/master" target="_blank">Git Logs<a></li>
-			  <li><a href="doc/ref.html">References</a></li>
+			  <li><a href="ref.html">References</a></li>
 			</ol>
 			</font>
 		</td>
@@ -74,85 +71,9 @@ $("#includedContent").load("content.html");
 			<font color="ffffff">
 				<center>Actual Datasets can be found <a href="../Dataset/">here</a></center></br>
 
-				<table>
-					<tr>
-						<td>
-							<a href="img/img2.JPG" target="_blank"><img src="img/img2.JPG" width="325"></a></br>
-							<font color="ffffff">
-							<h2>Original Image 1</h2>
-
-							Exposure Time: 1/1600 sec.</br>
-							Aperture Value: 8.00 EV (f/16.0)</br>
-							ISO Speed Rating: 400</br>
-							Focal Length: 32.0 mm</br>
-
-
-							</font>
-						</td>
-						<td>
-							<a href="img/img1.JPG" target="_blank"><img src="img/img1.JPG" width="325"></a></br>
-							<font color="ffffff">
-							<h2>Original Image 2</h2>
-
-							Exposure Time: 1/400 sec.</br>
-							Aperture Value: 8.00 EV (f/16.0)</br>
-							ISO Speed Rating: 400</br>
-							Focal Length: 32.0 mm</br>
-
-							</font>
-						</td>
-						<td>
-							<a href="img/img3.JPG" target="_blank"><img src="img/img3.JPG" width="325"></a></br>
-							<font color="ffffff">
-							<h2>Original Image 3</h2>
-
-							Exposure Time: 1/100 sec.</br>
-							Aperture Value: 8.00 EV (f/16.0)</br>
-							ISO Speed Rating: 400</br>
-							Focal Length: 32.0 mm</br>
-
-							</font>
-						</td>
-					</tr>
-					<tr>
-						<td colspan=3>
-							<hr>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<a href="img/IMG_9495.jpg" target="_blank"><img src="img/IMG_9495.jpg" width="325"></a></br>
-							<font color="ffffff">
-							<h2>Original Image 1</h2>
-							Exposure Time: 4 sec.</br>
-							Aperture Value: 8.92 EV (f/22.0)</br>
-							ISO Speed Rating: 100</br>
-							Focal Length: 15.0 mm</br>
-							</font>
-						</td>
-						<td>
-							<a href="img/IMG_9496.jpg" target="_blank"><img src="img/IMG_9496.jpg" width="325"></a></br>
-							<font color="ffffff">
-							<h2>Original Image 2</h2>
-							Exposure Time: 1.6 sec.</br>
-							Aperture Value: 8.92 EV (f/22.0)</br>
-							ISO Speed Rating: 100</br>
-							Focal Length: 15.0 mm</br>
-							</font>
-						</td>
-						<td>
-							<a href="img/IMG_9497.jpg" target="_blank"><img src="img/IMG_9497.jpg" width="325"></a></br>
-							<font color="ffffff">
-							<h2>Original Image 3</h2>	
-							Exposure Time: 1 sec.</br>
-							Aperture Value: 8.92 EV (f/22.0)</br>
-							ISO Speed Rating: 100</br>
-							Focal Length: 15.0 mm</br>
-
-							</font>
-						</td>
-					</tr>
-				</table>
+				<a href="../dataset/manona/">Monona Terrance </a></br>
+				<a href="../dataset/test/">University (Test set)</a></br>
+				<a href="../dataset/iphone/">CS Lobby</a></br>
 
 			</font>
 	<!-- #### DISPLAY AREA ### -->			

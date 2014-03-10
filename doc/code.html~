@@ -45,27 +45,24 @@ $("#includedContent").load("content.html");
 			</font>
 			</h2>
 			<ol type="0">
-			  <li>Home</li>
-			  <li><a href="doc/intro.html">Introduction<a></li>
-			  <li><a href="doc/implement.html">Implementation</a></li>
+			  <li><a href="../index.html">Home</a></li>
+			  <li><a href="intro.html">Introduction<a></li>
+			    <li><a href="imgAcc.html">Image Acquisition</a></li>
+			    <li><a href="cc.html">Cylindrical Coordinates</a></li>
+			    <li><a href="sift.html">SIFT Feature detection</a></li>
+			    <li><a href="ransac.html">Ransac Translation</a></li>
+			    <li><a href="transalation.html">Stitching: Translastion</a></li>
+			    <li><a href="blending.html">Image Blending</a></li>		  
+			  <li>Results</li>
 			  <ol type="1">
-			    <li><a href="doc/imgAcc.html">Image Acquisition</a></li>
-			    <li><a href="doc/cc.html">Cylindrical Coordinates</a></li>
-			    <li><a href="doc/sift.html">SIFT Feature detection</a></li>
-			    <li><a href="doc/ransac.html">Ransac Translation</a></li>
-			    <li><a href="doc/transalation.html">Stitching: Translastion</a></li>
-			    <li><a href="doc/perspective.html">Stitching: Perspective</a></li>
-			    <li><a href="doc/blending.html">Image Blending</a></li>
+			    <li><a href="results1.html">Monona Terrace</a></li>
+			    <li><a href="results2.html">University</a></li>
+			    <li><a href="results3.html">CS Lobby (iPhone)</a></li>
 			  </ol>
-			  <li><a href="doc/results.html">Results</a></li>
-			  <ol type="1">
-			    <li><a href="doc/results2.html">Results 1</a></li>
-			    <li><a href="doc/results3.html">Results 2</a></li>
-			  </ol>
-			  <li><a href="doc/dataset.html">Datasets</a></li>
-			  <li><a href="doc/code.html">Code</a></li>
+			  <li><a href="dataset.html">Datasets</a></li>
+			  <li><a href="code.html">Code</a></li>
 			  <li><a href="https://github.com/saikatgomes/CV-P2-PANO/commits/master" target="_blank">Git Logs<a></li>
-			  <li><a href="doc/ref.html">References</a></li>
+			  <li><a href="ref.html">References</a></li>
 			</ol>
 			</font>
 		</td>
@@ -99,52 +96,13 @@ Output Files:</br>
 Images for each stitching of the panorama and the final panorama warped and cropped.
 </br></br>
 
+<b><u>Average Vector Translation Panorama</u></b>
+</br></br>
 
-<b><u>HDR implementation:</u></b></br></br>
+To run the simple average vector transtion panorama:</br></br>
+PanoramaMain(inDir, f, SIFT_thresh, blend, printVerbose, doSIFT_Test)<br></br>
+ex: PanoramaMain('../images/monona/final/simple2/',660.87,2.5,0,1,0);<br>
 
-The hdr fuctionality is implemented in the <a href="../src/hdr">hdr folder</a>.</br></br>
-Syntax:</br>
-<b><i>processHDR( D , L , R_S , R_B , M_S );</i></b> </br></br>
-where:</br>
-D: Name of the directory containing the *.info file; ex: '../../Images/imageSet1/ (note: it expects a '/' in the end)</br>
-L: is a vector containing the smoothing fact (lamda) used to create the hdr format; ex: [ 1 50 100 ]</br>
-R_S: is a vector containg the saturation factor used in Rienhard's Local and Global Tone mapping; ex [0.6 0.8]</br>
-R_B: is a vector containg the bightness fatcor used in Rienhard's Global Tone mapping; ex: [0.76 0.92]</br>
-M_S: is a vector containg the saturation factores used in the matlab tone mapping functions; ex: [1 5 10 50 10]</br></br>
-A *.info file is expected in the directory folder (D) in which the first line contains the number of images, and the remaining lines contain the name of each image along with its shutter speed (<a href = "img/infoFile/museum.info"> see example here</a>).<br>
-
-A unique output folder in the form of 'HDR_{$timestamp}' is created in the directory where all the output files are created:<br><br>
-Output Files:</br>
-aveImage.jpg ... created by averaging the pixels of the input files</br>
-redResponseCurve-{L}.jpg ... red response curve estimated (one for each L value)</br>
-greenResponseCurve-{L}.jpg ... green response curve estimated (one for each L value)</br>
-blueResponseCurve-{L}.jpg ... blue response curev estimated (one for each L value)</br>
-imageHDR-{L}.hdr ... the HDR file formated created (one for each L value)</br>
-ToneMap-Matlab-{M_S}-{L}.jpg ... tonemapped image using Matlab inbuilt functionality (one for each L & M_S value)</br>
-ToneMap-Local-{R_S}-{L}.jpg ... tonemapped image using Reinhard's Local Tone Mapping implemented by us. (one for each L & R_S value)</br>
-ToneMap-Global-{R_S}-{R_B}-{L}.jpg ... tonemapped image using Reinhard's Global Tone Mapping implemented by us. (one for each L, R_S & R_B value)</br></br>
-Here is a sample execution output:<br>
-<i>
->> processHDR('../../Images/museumHDR/',[50],[3],[1],[5]);<br>
-18:47:38 [INFO] Output dir created at../../Images/museumHDR/HDR_02192014_184737869<br>
-18:47:38 [INFO] Creating average image ...<br>
-18:47:57 [INFO] Average image created.<br>
-18:47:57 [INFO] Loading image data ...<br>
-18:47:58 [INFO] Loading image:../../Images/museumHDR/IMG_9495.jpg<br>
-18:47:58 [INFO] Loading image:../../Images/museumHDR/IMG_9496.jpg<br>
-18:47:58 [INFO] Loading image:../../Images/museumHDR/IMG_9497.jpg<br>
-18:48:00 [INFO] Image data loaded.<br>
-18:48:00 [INFO] Estimate camera response curve ...<br>
-18:48:00 [INFO] Solving SVD ...<br>
-18:48:01 [INFO] SVD solved.<br>
-18:48:03 [INFO] Camera response curve estimated.<br>
-18:48:03 [INFO] Creating HDR file ...<br>
-18:48:22 [INFO] HDR file created ...<br>
-18:48:22 [INFO] Creating standard tonemap(s) ...<br>
-18:48:39 [INFO] Standard tonemap(s) created.<br>
-18:48:39 [INFO] Creating Reinhard tonemap(s) ...<br>
-18:48:55 [INFO] Reinhard tonemap(s) created.<br><br>
-</i>
 
 			</font>
 

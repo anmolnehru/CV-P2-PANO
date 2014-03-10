@@ -45,22 +45,19 @@ $("#includedContent").load("content.html");
 			</font>
 			</h2>
 			<ol type="0">
-			  <li>Home</li>
+			  <li><a href="../index.html">Home</a></li>
 			  <li><a href="intro.html">Introduction<a></li>
-			  <li><a href="implement.html">Implementation</a></li>
-			  <ol type="1">
 			    <li><a href="imgAcc.html">Image Acquisition</a></li>
 			    <li><a href="cc.html">Cylindrical Coordinates</a></li>
 			    <li><a href="sift.html">SIFT Feature detection</a></li>
 			    <li><a href="ransac.html">Ransac Translation</a></li>
 			    <li><a href="transalation.html">Stitching: Translastion</a></li>
-			    <li><a href="perspective.html">Stitching: Perspective</a></li>
-			    <li><a href="blending.html">Image Blending</a></li>
-			  </ol>
-			  <li><a href="results.html">Results</a></li>
+			    <li><a href="blending.html">Image Blending</a></li>		  
+			  <li>Results</li>
 			  <ol type="1">
-			    <li><a href="results2.html">Results 1</a></li>
-			    <li><a href="results3.html">Results 2</a></li>
+			    <li><a href="results1.html">Monona Terrace</a></li>
+			    <li><a href="results2.html">University</a></li>
+			    <li><a href="results3.html">CS Lobby (iPhone)</a></li>
 			  </ol>
 			  <li><a href="dataset.html">Datasets</a></li>
 			  <li><a href="code.html">Code</a></li>
@@ -91,14 +88,15 @@ For this project, we took a series of images from a Canon A640 camera as well as
 </li>
 <br>
 <li>
-<b>Cell phone images:</b> We tested our algorithms on images taken from an iPhone 5 camera.  Our simple average vector translation actually yielded very good results for these images HYPERLINK TO THOSE IMAGES.
+<b>Cell phone images:</b> We tested our algorithms on images taken from an iPhone 5 camera.  Our simple average vector translation actually yielded very good results for these images.
 </li>
 <br>
 <li>
 <b>Variation of RANSAC methods:</b> In addition to implementing the standard RANSAC algorithm, we also expanded upon it with some variations in order to utilize better epsilon and n parameters.  One issue with the standard RANSAC algorithm is finding appropriate epsilon and n values for each set of images.  Rather than having to test different epsilons and n values for each set of images, we used a few different heuristics to attempt to use appropriate epsilon and n parameters for any arbitrary set of images.
 </li>
+<br>
 <li>
-<b>Pyramid blending:</b> We based our code off of LINK TO CODE HERE?.  For this blending, we...SAIKAT ADD IN STUFF HERE
+<b>Pyramid blending:</b> We used pyramid blending while stitching the mosaics. The overlap region were blended using pyramid blending.
 </li>
 </ol>
 </br>

@@ -21,6 +21,16 @@
 		height: 372px;
 		cursor: move;
 	}
+	.myPano4 {
+		background-image: url(img/blend/p15.jpg);
+		height: 518px;
+		cursor: move;
+	}
+	.myPano5 {
+		background-image: url(img/panC1.jpg);
+		height: 518px;
+		cursor: move;
+	}
 </style>
 
 </head>
@@ -52,6 +62,17 @@ $(document).ready(function ($) {
 	$('.myPano3').panoViewer();
 });
 </script>
+<script>
+$(document).ready(function ($) {
+	$('.myPano4').panoViewer();
+});
+</script>
+<script>
+$(document).ready(function ($) {
+	$('.myPano5').panoViewer();
+});
+</script>
+
 
 <script> 
 $(function(){
@@ -85,22 +106,19 @@ $("#includedContent").load("content.html");
 			</font>
 			</h2>
 			<ol type="0">
-			  <li>Home</li>
+			  <li><a href="../index.html">Home</a></li>
 			  <li><a href="intro.html">Introduction<a></li>
-			  <li><a href="implement.html">Implementation</a></li>
-			  <ol type="1">
 			    <li><a href="imgAcc.html">Image Acquisition</a></li>
 			    <li><a href="cc.html">Cylindrical Coordinates</a></li>
 			    <li><a href="sift.html">SIFT Feature detection</a></li>
 			    <li><a href="ransac.html">Ransac Translation</a></li>
 			    <li><a href="transalation.html">Stitching: Translastion</a></li>
-			    <li><a href="perspective.html">Stitching: Perspective</a></li>
-			    <li><a href="blending.html">Image Blending</a></li>
-			  </ol>
-			  <li><a href="results.html">Results</a></li>
+			    <li><a href="blending.html">Image Blending</a></li>		  
+			  <li>Results</li>
 			  <ol type="1">
-			    <li><a href="results2.html">Results 1</a></li>
-			    <li><a href="results3.html">Results 2</a></li>
+			    <li><a href="results1.html">Monona Terrace</a></li>
+			    <li><a href="results2.html">University</a></li>
+			    <li><a href="results3.html">CS Lobby (iPhone)</a></li>
 			  </ol>
 			  <li><a href="dataset.html">Datasets</a></li>
 			  <li><a href="code.html">Code</a></li>
@@ -120,9 +138,10 @@ We used two different types of blending when stitching images together.  First, 
 
 			
 			<hr>
-			<center> No feather blending vs. feather blending for images taken with a Canon A640 camera</center>
+			<center> No feather blending vs. feather blending vs pyramid blending for images taken with a Canon A640 camera</center>
 			<img src="img/nonBlend/1.jpg"  width=985><br>
 			<img src="img/panC1.jpg"  width=985><br>
+			<img src="img/blend/p15.jpg"  width=985><br>
 			<hr>
 			<center> No feather blending vs. feather blending for testing images given</center>
 			<img src="img/nonBlend/2.jpg"  width=985><br>
@@ -141,12 +160,14 @@ We used two different types of blending when stitching images together.  First, 
 	</tr>
 	<tr align=center>
 		<td colspan=2>
-			<hr><div class="myPano1"></div>
+			<font color="ffffff">
+			<hr>No blending <br><div class="myPano1"></div>
+			<hr>Feather blending <br><div class="myPano5"></div>
+			<hr>Pyramid blending <br><div class="myPano4"></div>
+			<hr>No blending <br><div class="myPano2"></div>
+			<hr>No blending <br><div class="myPano3"></div>
 			<hr>
-			<hr><div class="myPano2"></div>
-			<hr>
-			<hr><div class="myPano3"></div>
-			<hr>
+			<font>
 		</td>
 
 	<tr>

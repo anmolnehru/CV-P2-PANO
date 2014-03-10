@@ -1,8 +1,26 @@
+%  CombineImages - Combines two images entered and keeps track of the most
+%  top left pixel as well as the top left pixel in the newest image
+%  entered.  Note: the order of the images should be the same as the
+%  SiftAndRansac function
+%--------------------------------------------------------------------------
+%   Author: Saikat Gomes
+%           Steve Lazzaro
+%   CS 766 - Assignment 2
+%   Params: img1 - first image
+%           img2 - second image
+%           h - the homography to use to transform the 1st to the 2nd image
+%           p - the small p value
+%           pixelFirstTopLeft - the pixel in the top left of first image
+%           pixelMidTopLeft - the middle pixel in the first image
+%   
+%   Returns: combinedImage - the combined images
+%           topLeftPixel - top left pixel of first image
+%           pixelFirstTopLeftNew - top left pixel of second image
+%           midpointOther - the midpoint of the second image
+%           pixelMidTopLeft - the middle pixel in the first image
+%--------------------------------------------------------------------------
+
 function [ combinedImage, topLeftPixel , pixelFirstTopLeftNew, midpointOther, pixelMidTopLeft] = CombineImages(img1, img2, h, pixelFirstTopLeft, pixelMidTopLeft)
-%UNTITLED2 Summary of this function goes here
-%
-%   The order of the images should be the same as the SiftAndRansac
-%   function
 
 minRow = 99999999;
 maxRow = 0;

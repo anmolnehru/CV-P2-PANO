@@ -2,7 +2,6 @@ function [] = PanoramaMain(inDir, f, SIFT_thresh, printVerbose, doSIFT_Test)
     
     DO_FLAG=doSIFT_Test;
     DO_PRINT_IMG=printVerbose;
-    %pwdstartup;
     srgStartup;
     warning('off','all');
     outDir=strcat(inDir,'PANO_',datestr(now,'mmddyyyy_HHMMSSFFF'));

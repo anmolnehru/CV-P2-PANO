@@ -149,12 +149,7 @@ function [ outImg, outImgCorrected ] = createSimpleStitch( pixArray,SIFT_thresh,
               end
            end
         end    
-        
-        display('get p blend!');
-        nz=figure;
-        imgTest=pyrTest(I1_ori,I2_ori);
-        imshow(imgTest);
-        
+                
         img3=cropImg(img3);
         img3=uint8(img3);
         

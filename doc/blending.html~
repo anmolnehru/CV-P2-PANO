@@ -82,16 +82,24 @@ $("#includedContent").load("content.html");
 		</td>
 		<td align=left>
 	<!-- #### DISPLAY AREA ### -->
-			<font color="ffffff">
+		<font color="ffffff">
+<h2><center>Blending</center></h2>
+
+We used two different types of blending when stitching images together.  First, we used feather blending, which yielded very good results, even for the testing images that vary in exposure.  We also experimented with pyramid blending and found that to produce even better results.  Some examples of panoramas with and without blending are shown below.
+
+<br>
 
 			
 			<hr>
+			<center> No feather blending vs. feather blending for images taken with a Canon A640 camera</center>
 			<img src="img/nonBlend/1.jpg"  width=985><br>
 			<img src="img/panC1.jpg"  width=985><br>
 			<hr>
+			<center> No feather blending vs. feather blending for testing images given</center>
 			<img src="img/nonBlend/2.jpg"  width=985><br>
 			<img src="img/panC2.jpg"  width=985><br>
 			<hr>
+			<center> No feather blending vs. feather blending for images taken with an iPhone 5</center>
 			<img src="img/nonBlend/3.jpg"  width=985><br>
 			<img src="img/panC3.jpg"  width=985><br>
 			<hr>

@@ -1,0 +1,1 @@
+For the different ransac type folders, a small p of 0.1 was used and a big P of 0.99 was used.

@@ -7,7 +7,7 @@ function [ newPanorama ] = CreateStitchedImage(pixarray, outDir, ransactype)
 
 n = 4;
 epsilon = 5;
-smallP = 0.1;
+smallP = 0.3;
 type = ransactype;
 if (type < 1 || type > 5)
     type = 1;

@@ -142,8 +142,8 @@ midpointOther = [otherRow, otherCol];
 %combinedImage = imresize(combinedImage, 1, 'bilinear');
 
 combinedImage = InterpolateImage(combinedImage);
-combinedImage = InterpolateImage(combinedImage);
-combinedImage = InterpolateImage(combinedImage);
+%combinedImage = InterpolateImage(combinedImage);
+%combinedImage = InterpolateImage(combinedImage);
 
 combinedImage = uint8(combinedImage);
 

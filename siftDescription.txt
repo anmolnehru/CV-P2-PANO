@@ -1,3 +1,0 @@
-SIFT
-
-In order to find SIFT features for our images, we used the VLFeat toolbox for Matlab.  This toolbox made finding SIFT features extremely simple as all we needed to use was the vl_sift method to find the sift features for each image and then the vl_ubcmatch method to find matching sifts for two images.

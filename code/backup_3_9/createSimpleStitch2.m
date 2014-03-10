@@ -1,13 +1,17 @@
-function [ outImg ] = createSimpleStitch( pixArray, outDir )
+function [ outImg, outImgCorrected ] = createSimpleStitch( pixArray,SIFT_thresh, outDir )
     
+
     for r=1:size(pixArray,2)
         for c=1:size(pixArray,3)
             I1(r,c,1)=pixArray(1,r,c,1);
             I1(r,c,2)=pixArray(1,r,c,2);
             I1(r,c,3)=pixArray(1,r,c,3);
         end
-    end
-       
+    end       
+    
+    row1=size(I1,1)/2;
+    col1=size(I1,2)/2;
+    y_disp=0;
     
     for ii=2: size(pixArray,1)
 
@@ -32,18 +36,17 @@ function [ outImg ] = createSimpleStitch( pixArray, outDir )
             end
         end
         
-        %images are already cropped
+        if(ii==size(pixArray,1))
+            row2=size(I2,1)/2;
+        end
+        
         I1=cropImg(I1);
         I2=cropImg(I2);
         I1_ori=I1;
         I2_ori=I2;        
-        
-        imshow(uint8(I1_ori));
-        
+                
         MAX_OVERLAP_Y=size(I2,1)/8;
         MAX_OVERLAP_X=size(I2,2)/2;
-% % %         hold off
-% % %         saveas(handle,strcat(outDir,'/switch_',num2str(ii),'.jpg'));
 
         I1 = single(rgb2gray(I1)) ;
         [f,d] = vl_sift(I1) ;
@@ -52,26 +55,22 @@ function [ outImg ] = createSimpleStitch( pixArray, outDir )
 
         [matches, scores] = vl_ubcmatch(d, d2, 2) ;              
         
-% % % %         img2=zeros(size(I1_ori,1),size(I1_ori,2)+size(I2_ori,2),3);
-% % % %         for i=1:size(I2_ori,1)
-% % % %            for j=1:size(I2_ori,2)
-% % % %               img2(i,j,:)=I1_ori(i,j,:);
-% % % %               img2(i,j+size(I1_ori,2),:)=I2_ori(i,j,:);
-% % % %               
-% % % %               if(j==MAX_OVERLAP_X)
-% % % %                   img2(i,j,1)=0;
-% % % %                   img2(i,j,2)=0;
-% % % %                   img2(i,j,3)=0;
-% % % %                   img2(i,j+size(I1_ori,2),1)=0;
-% % % %                   img2(i,j+size(I1_ori,2),2)=0;
-% % % %                   img2(i,j+size(I1_ori,2),3)=0;
-% % % %               end
-% % % %            end
-% % % %         end    
+        img2=zeros(size(I1_ori,1),size(I1_ori,2)+size(I2_ori,2),3);
+        for i=1:size(I1_ori,1)
+            for j=1:size(I1_ori,2)                
+              img2(i,j,:)=I1_ori(i,j,:);
+            end
+        end
+        for i=1:size(I2_ori,1)
+           for j=1:size(I2_ori,2)
+              img2(i,j+size(I1_ori,2),:)=I2_ori(i,j,:);              
+           end
+        end    
 
-% % %         handle = figure ;
-% % %         imshow(uint8(img2));
-% % %         hold on        
+        handle1 = figure ;
+        imshow(uint8(img2));
+        hold on       
+        
         clear fx1;
         clear fx2;
         clear fy1;
@@ -102,17 +101,21 @@ function [ outImg ] = createSimpleStitch( pixArray, outDir )
             x_sum=x_sum+(abs(fx1-fx2));
             y_sum=y_sum+(fy1-fy2);
              
-% % %              p1 = [fx1,fx2];
-% % %              p2 = [fy1,fy2];
-% % %             line(p1,p2,'Color','r','LineWidth',.5);
+             p1 = [fx1,fx2];
+             p2 = [fy1,fy2];
+            line(p1,p2,'Color','r','LineWidth',.5);
         end
-% % %         hold off
-% % %         saveas(handle,strcat(outDir,'/switch_',num2str(ii),'.jpg'));
+        
+        hold off
+        saveas(handle1,strcat(outDir,'/stitch_',num2str(ii),'.jpg'));
+        close(handle1);
 
         x_t = round(x_sum/pt_count);
         y_t = round(y_sum/pt_count);
+        y_disp=y_t;
 
         img3=zeros(size(I1_ori,1),size(I1_ori,2)+size(I2_ori,2)-x_t,3);
+        
         for i=1:size(I1_ori,1)
             for j=1:size(I1_ori,2)
                 img3(i,j,:)=I1_ori(i,j,:);               
@@ -121,7 +124,6 @@ function [ outImg ] = createSimpleStitch( pixArray, outDir )
         
         for i=1:size(I2_ori,1)
            for j=1:size(I2_ori,2)
-              %img3(i,j,:)=I1_ori(i,j,:);
               if(i+y_t<size(I2_ori,1)&&i+y_t>0)
                   y_plus = y_t;
               else
@@ -134,20 +136,12 @@ function [ outImg ] = createSimpleStitch( pixArray, outDir )
                   w=w1+w2;
                   
                   for k=1:3
-
                       rgb1=double(I1_ori(i+y_plus,j+size(I1_ori,2)-x_t,k));
-                      rgb2=double(I2_ori(i,j,k));
-                      
-                      %display(strcat('w1=',num2str(w1),' rgb1=',num2str(rgb1),' w2=',num2str(w2),' rgb2=',num2str(rgb2),' w=',num2str(w)));
-                      
+                      rgb2=double(I2_ori(i,j,k));                        
                       rgb1=double(w1*rgb1);
                       rgb2=double(w2*rgb2) ;    
-                      rgb=(rgb1+rgb2)/w;
-                      
-                      %display(strcat('w1=',num2str(w1),' rgb1=',num2str(rgb1),' w2=',num2str(w2),' rgb2=',num2str(rgb2),' w=',num2str(w),' rgb=',num2str(rgb)));
-                      
-                       img3(i+y_plus,j+size(I1_ori,2)-x_t,k)=uint8(rgb);
-                      
+                      rgb=(rgb1+rgb2)/w;                      
+                      img3(i+y_plus,j+size(I1_ori,2)-x_t,k)=uint8(rgb);                      
                   end
                                   
               else             
@@ -156,19 +150,52 @@ function [ outImg ] = createSimpleStitch( pixArray, outDir )
            end
         end    
         
+        display('get p blend!');
+        nz=figure;
+        imgTest=pyrTest(I1_ori,I2_ori);
+        imshow(imgTest);
+        
         img3=cropImg(img3);
         img3=uint8(img3);
-        %figure;
-% % %         imshow(img3);
-        %imwrite(img3,strcat(outDir,'/pairJoin_',num2str(ii),'.jpg'));
+        
+        handle2 = figure;
+        imwrite(img3,strcat(outDir,'/pairJoin_',num2str(ii),'.jpg'));
+        close(handle2);
                 
-        %clear I1;
         I1=img3;        
     end     
-
-
-    outImg=I1;
-
-
+    
+    outImg=I1;  
+    
+    row1
+    row2
+    y_disp
+    
+    
+    if(y_disp<0)
+       start= size(I1,1);
+       ending=1;
+       step=-1;
+    else        
+       start=1;
+       ending=size(I1,1);
+       step=1;
+    end
+    
+    for c=col1:size(I1,2)-col1
+       %for r=1:size(I1,1)
+       for r=start:step:ending
+           w=double(c/(size(I1,2)-2*col1));
+           rise = round(double(y_disp*w));
+           if (rise==0||r-rise<=0||r-rise>size(I1,1))
+                continue;
+           end
+           I1(r-rise,c,:)=I1(r,c,:);           
+       end
+    end  
+    %
+    I1=imcrop(I1,[col1 (y_disp) (size(I1,2)-2*col1) (size(I1,1)-2*y_disp)]);
+    outImgCorrected=uint8(I1);
+    
 end
 

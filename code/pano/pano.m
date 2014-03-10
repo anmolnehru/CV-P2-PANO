@@ -1,7 +1,0 @@
-function [  ] = pano( dir )
-
-
-
-
-end
-

@@ -1,4 +1,4 @@
-function [] = PanoramaMain2(inDir, f)
+function [stitchedImg] = PanoramaMain2(inDir, f)
     
     %pointsToSample = 4;
     %epsilon = 10;
@@ -132,7 +132,6 @@ function [] = PanoramaMain2(inDir, f)
 %     simpleStitchedImg=createSimpleStitch(pixArray,outDir);
 %     imshow(simpleStitchedImg);
     
-    stitchedImg = CreateStitchedImage(pixArray,outDir);
-    imshow(stitchedImg);
+    stitchedImg  = CreateStitchedImage(pixArray,outDir);
     
 end

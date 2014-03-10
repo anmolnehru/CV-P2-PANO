@@ -78,7 +78,36 @@ $("#includedContent").load("content.html");
 	</tr>
 	<tr>
 		<td width='315' alight=left valign=top>
-			<div id="includedContent"></div>
+			<font color="ffffff">
+			<h2>
+			<font color="#A9F5F2">	
+			Contents
+			</font>
+			</h2>
+			<ol type="0">
+			  <li>Home</li>
+			  <li><a href="doc/intro.html">Introduction<a></li>
+			  <li><a href="doc/implement.html">Implementation</a></li>
+			  <ol type="1">
+			    <li><a href="doc/imgAcc.html">Image Acquisition</a></li>
+			    <li><a href="doc/cc.html">Cylindrical Coordinates</a></li>
+			    <li><a href="doc/sift.html">SIFT Feature detection</a></li>
+			    <li><a href="doc/ransac.html">Ransac Translation</a></li>
+			    <li><a href="doc/transalation.html">Stitching: Translastion</a></li>
+			    <li><a href="doc/perspective.html">Stitching: Perspective</a></li>
+			    <li><a href="doc/blending.html">Image Blending</a></li>
+			  </ol>
+			  <li><a href="doc/results.html">Results</a></li>
+			  <ol type="1">
+			    <li><a href="doc/results2.html">Results 1</a></li>
+			    <li><a href="doc/results3.html">Results 2</a></li>
+			  </ol>
+			  <li><a href="doc/dataset.html">Datasets</a></li>
+			  <li><a href="doc/code.html">Code</a></li>
+			  <li><a href="https://github.com/saikatgomes/CV-P2-PANO/commits/master" target="_blank">Git Logs<a></li>
+			  <li><a href="doc/ref.html">References</a></li>
+			</ol>
+			</font>
 		</td>
 		<td align=left>
 	<!-- #### DISPLAY AREA ### -->

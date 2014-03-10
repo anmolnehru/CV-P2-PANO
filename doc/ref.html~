@@ -38,7 +38,7 @@ $("#includedContent").load("content.html");
 	</tr>
 	<tr>
 		<td width='315' alight=left valign=top>
-			<div id="includedContent"></div>
+			<div id="content"></div>
 		</td>
 		<td align=left>
 	<!-- #### DISPLAY AREA ### -->

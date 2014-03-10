@@ -70,6 +70,7 @@ $("#includedContent").load("content.html");
 	<!-- #### DISPLAY AREA ### -->
 			<font color="ffffff">
 <h2><center> Image Stitching: Simple Translations </center></h2>
+The average vector translation method consisted of first finding SIFT features for a pair of images.  Then, our algorithm throws out features that are unlikely to be in the overlap region.  Finally, it takes an average of the distance for each SIFT match and stitches the images together by shifting 1 image by that average amount.  This yielded very good results that were oftentimes better than the standard RANSAC/homography method, but part of that finding may be due to our images being taken with a steady camera frame.
 
 <table>
 	<tr align=left>

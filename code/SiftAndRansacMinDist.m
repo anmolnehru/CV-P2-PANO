@@ -85,7 +85,6 @@ display(strcat('k: ', num2str(k)));
 
 besthomography = zeros(3,3);
 minDist = realmax;
-display(minDist);
 for i = 1:k
     [points, idx] = datasample(matcharr,n,2); %get n random points
     %these will be 2 x n arrays of the points used for computing the
@@ -109,9 +108,8 @@ for i = 1:k
         point2 = zeros(3);
         point2(1:2) = sift2(1:2, matcharr(2, index));
         point2(3) = 1;
-        
         dist = norm(point2predicted - point2);
-        totalDist = totalDist + dist^2;
+        totalDist = totalDist + dist;
     end
     
     if (minDist > totalDist)

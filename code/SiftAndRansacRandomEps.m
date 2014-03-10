@@ -1,9 +1,25 @@
+%  SiftAndRansacRandomEps - Finds SIFT features and then use a variation 
+%       of the RANSAC method to
+%       calculate the best homography between the two images passed in.  
+%       This variation does NOT use a set epsilon but instead randomly 
+%       tries different epsilons between 1 and 20 on each iteration
+%       and takes the ratio of numInliers / epsilonSize to choose best
+%       Note the first image should be on the left of the right one.
+%--------------------------------------------------------------------------
+%   Author: Saikat Gomes
+%           Steve Lazzaro
+%   CS 766 - Assignment 2
+%   Params: img1 - first image
+%           img2 - second image
+%           n - the number of points to use to calculate the homography for
+%                   each RANSAC iteration
+%           p - the small p value
+%   
+%   Returns: besthomography - the best homography calculated for the images
+%                               given
+%--------------------------------------------------------------------------
+
 function [besthomography] = SiftAndRansacRandomEps(img1, img2, n, p)
-%  Improve RANSAC by randomly trying different epsilons on each iteration
-%  and taking ratio of numInliers / epsilonSize to choose best
-%   the images are 2 rgb image arrays
-%   the first image entered should be on the right with respect to the next
-%   image
 
 threshold = 1.5; %default threshold
 bigP = 0.99;

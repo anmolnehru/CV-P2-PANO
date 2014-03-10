@@ -48,6 +48,51 @@ $("#includedContent").load("content.html");
 The software implementation was done in Matlab.<br>
 The code package can be downloaded from <a href="../src">here</a>.<br></br>
 
+<b><u>Panorama creation with standard homography methods:</u></b></br></br>
+
+This functionality is implemented in the <a href="../code/">code folder</a>.</br></br>
+Syntax:</br>
+<b><i>PanoramaMainRansac( inDir , f , ransactype );</i></b> </br></br>
+where:</br>
+inDir: Name of the directory containing the images which should be ordered from left to right</br>
+f: is a vector containing the smoothing fact (lamda) used to create the hdr format; ex: [ 1 50 100 ]</br>
+ransactype: is a vector containg the saturation factor used in Rienhard's Local and Global Tone mapping; ex [0.6 0.8]</br>
+
+A unique output folder in the form of 'HDR_{$timestamp}' is created in the directory where all the output files are created:<br><br>
+Output Files:</br>
+aveImage.jpg ... created by averaging the pixels of the input files</br>
+redResponseCurve-{L}.jpg ... red response curve estimated (one for each L value)</br>
+greenResponseCurve-{L}.jpg ... green response curve estimated (one for each L value)</br>
+blueResponseCurve-{L}.jpg ... blue response curev estimated (one for each L value)</br>
+imageHDR-{L}.hdr ... the HDR file formated created (one for each L value)</br>
+ToneMap-Matlab-{M_S}-{L}.jpg ... tonemapped image using Matlab inbuilt functionality (one for each L & M_S value)</br>
+ToneMap-Local-{R_S}-{L}.jpg ... tonemapped image using Reinhard's Local Tone Mapping implemented by us. (one for each L & R_S value)</br>
+ToneMap-Global-{R_S}-{R_B}-{L}.jpg ... tonemapped image using Reinhard's Global Tone Mapping implemented by us. (one for each L, R_S & R_B value)</br></br>
+Here is a sample execution output:<br>
+<i>
+>> processHDR('../../Images/museumHDR/',[50],[3],[1],[5]);<br>
+18:47:38 [INFO] Output dir created at../../Images/museumHDR/HDR_02192014_184737869<br>
+18:47:38 [INFO] Creating average image ...<br>
+18:47:57 [INFO] Average image created.<br>
+18:47:57 [INFO] Loading image data ...<br>
+18:47:58 [INFO] Loading image:../../Images/museumHDR/IMG_9495.jpg<br>
+18:47:58 [INFO] Loading image:../../Images/museumHDR/IMG_9496.jpg<br>
+18:47:58 [INFO] Loading image:../../Images/museumHDR/IMG_9497.jpg<br>
+18:48:00 [INFO] Image data loaded.<br>
+18:48:00 [INFO] Estimate camera response curve ...<br>
+18:48:00 [INFO] Solving SVD ...<br>
+18:48:01 [INFO] SVD solved.<br>
+18:48:03 [INFO] Camera response curve estimated.<br>
+18:48:03 [INFO] Creating HDR file ...<br>
+18:48:22 [INFO] HDR file created ...<br>
+18:48:22 [INFO] Creating standard tonemap(s) ...<br>
+18:48:39 [INFO] Standard tonemap(s) created.<br>
+18:48:39 [INFO] Creating Reinhard tonemap(s) ...<br>
+18:48:55 [INFO] Reinhard tonemap(s) created.<br><br>
+</i>
+
+
+
 <b><u>HDR implementation:</u></b></br></br>
 
 The hdr fuctionality is implemented in the <a href="../src/hdr">hdr folder</a>.</br></br>

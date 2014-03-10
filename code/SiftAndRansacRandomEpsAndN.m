@@ -1,11 +1,34 @@
-function [besthomography] = SiftAndRansacRandomEpsAndN(img1, img2, p)
-%  Improve RANSAC by randomly trying different epsilons on each iteration
-%  and taking ratio of numInliers / epsilonSize to choose best
-%   the images are 2 rgb image arrays
-%   the first image entered should be on the right with respect to the next
-%   image
+%  SiftAndRansacRandomEpsAndN - Finds SIFT features and then uses a 
+%       variation of the RANSAC method to calculate the best homography 
+%       between the two images passed in. Note the first image should be on 
+%       the left of the right one. Improve RANSAC by randomly trying 
+%       different epsilons on each iteration and taking the ratio
+%       of numInliers / epsilonSize.
+%       Also, this variation does NOT use a set n, but
+%       instead tries different n values between 4 and 18 on each
+%       iteration.  In order to calculate the number of iterations, we use
+%       what we call k* which adds a small fraction on each iteration based
+%       on the random n chosen.  For example, if the n chosen was 5 for a 
+%       particular iteration of the RANSAC loop, we add  
+%       1 / ( (log(1 - P) / log(1 - p^5) ) to the fraction.  In other 
+%       words, we added 1 / k for the randomly chosen n for each iteration 
+%       of the RANSAC loop. 
+%
+%--------------------------------------------------------------------------
+%   Author: Saikat Gomes
+%           Steve Lazzaro
+%   CS 766 - Assignment 2
+%   Params: img1 - first image
+%           img2 - second image
+%           p - the small p value
+%   
+%   Returns: besthomography - the best homography calculated for the images
+%                               given
+%--------------------------------------------------------------------------
 
-threshold = 2.5; %default threshold
+function [besthomography] = SiftAndRansacRandomEpsAndN(img1, img2, p)
+
+threshold = 1.5; %default threshold
 bigP = 0.99;
 smallP = p;
 

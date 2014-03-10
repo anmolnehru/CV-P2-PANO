@@ -1,7 +1,23 @@
+%  SiftAndRansac - Finds SIFT features and then uses the RANSAC method to
+%       calculate the best homography between the two images passed in.
+%       Note the first image should be on the left of the right one.
+%--------------------------------------------------------------------------
+%   Author: Saikat Gomes
+%           Steve Lazzaro
+%   CS 766 - Assignment 2
+%   Params: img1 - first image
+%           img2 - second image
+%           n - the number of points to use to calculate the homography for
+%                   each RANSAC iteration
+%           epsilon - the epsilon to use for calculating the number of
+%                       inliers on each RANSAC iteration
+%           p - the small p value
+%   
+%   Returns: besthomography - the best homography calculated for the images
+%                               given
+%--------------------------------------------------------------------------
+
 function [besthomography] = SiftAndRansac(img1, img2, n, epsilon, p)
-%UNTITLED Summary of this function goes here
-%   the images are 2 rgb image arrays
-%   the second image entered should be the panorama
 
 threshold = 1.5; %default threshold
 bigP = 0.99;

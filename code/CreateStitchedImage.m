@@ -1,13 +1,27 @@
+%  CreateStitchedImage - Iterates through images in pixarray, then 
+%       calculates SIFT features and runs a RANSAC variation (with big P 
+%       equal to 0.99) based on ransactype parameter entered.
+%--------------------------------------------------------------------------
+%   Author: Saikat Gomes
+%           Steve Lazzaro
+%   CS 766 - Assignment 2
+%   Params: pixarray - 4d pixel array where first index is the image number
+%                       and the rest is the standard image format
+%           outDir - directory where the images should be written
+%           ransactype - an integer from 1 to 5 that determines which
+%                       RANSAC variation to use.  1 is standard, 2 is
+%                       regression type, 3 is random epsilons, 4 is random
+%                       n's, and 5 is random epsilon and n's
+%   
+%   Returns: newPanorama - the final panorama image
+%   Creates: images in the directory passed in
+%--------------------------------------------------------------------------
+
 function [ newPanorama ] = CreateStitchedImage(pixarray, outDir, ransactype)
-%UNTITLED Summary of this function goes here
-%   pixarray - 4d pixel array
-%   type - integer which represents which ransac function to call: 1 if
-%   normal, 2 if mindist, 3 if random eps, 4 if random n, 5 if random eps
-%   and n
 
 n = 4;
 epsilon = 5;
-smallP = 0.3;
+smallP = 0.2;
 type = ransactype;
 if (type < 1 || type > 5)
     type = 1;
@@ -44,8 +58,6 @@ end
 newPanorama = VerticallyAdjustPanorama(panorama, pixelFirstTopLeft, topLeftOther, pixelMidTopLeft, midpointOther);
 
 imwrite(newPanorama, strcat(outDir, '/final_panorama', '.jpg'));
-
-%imshow(panorama);
 
 end
 

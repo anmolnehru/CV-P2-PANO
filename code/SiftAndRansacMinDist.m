@@ -1,8 +1,23 @@
+%  SiftAndRansacMinDist - Finds SIFT features and then uses a variation of the 
+%       RANSAC method to calculate the best homography between the two 
+%       images passed in.  This variation does NOT use an epsilon, but
+%       instead tries to minimize the sum of squared distances between the
+%       SIFT features and their matches
+%--------------------------------------------------------------------------
+%   Author: Saikat Gomes
+%           Steve Lazzaro
+%   CS 766 - Assignment 2
+%   Params: img1 - first image
+%           img2 - second image
+%           n - the number of points to use to calculate the homography for
+%                   each RANSAC iteration
+%           p - the small p value
+%   
+%   Returns: besthomography - the best homography calculated for the images
+%                               given
+%--------------------------------------------------------------------------
+
 function [besthomography] = SiftAndRansacMinDist(img1, img2, n, p)
-%UNTITLED Summary of this function goes here
-%   the images are 2 rgb image arrays
-%   the first image entered should be on the right with respect to the next
-%   image
 
 threshold = 1.5; %default threshold
 bigP = 0.99;
@@ -68,9 +83,9 @@ end
 k = round(log(1-bigP) / log(1 - (smallP ^ n)));
 display(strcat('k: ', num2str(k)));
 
-
 besthomography = zeros(3,3);
 minDist = realmax;
+display(minDist);
 for i = 1:k
     [points, idx] = datasample(matcharr,n,2); %get n random points
     %these will be 2 x n arrays of the points used for computing the
@@ -81,8 +96,6 @@ for i = 1:k
         firstPoints(:,j) = sift1(1:2, points(1,j));
         secondPoints(:,j) = sift2(1:2, points(2,j));
     end
-    %display(firstPoints);
-    %display(secondPoints);
     homography = ComputeHomography(firstPoints, secondPoints);
     %now iterate through all of matches and find the num of inliers
     totalDist = 0;

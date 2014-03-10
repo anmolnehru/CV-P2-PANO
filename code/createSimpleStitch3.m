@@ -45,6 +45,13 @@ function [ outImg, outImgCorrected ] = createSimpleStitch( pixArray,SIFT_thresh,
         I2=cropImg(I2);
         I1_ori=I1;
         I2_ori=I2;
+        
+%         figure
+%         imshow(uint8(I1));
+%         figure
+%         imshow(uint8(I2));
+%         
+%         display('initial images shown');
                 
         MAX_OVERLAP_Y=size(I2,1)/8;
         MAX_OVERLAP_X=size(I2,2)/2;
@@ -53,6 +60,13 @@ function [ outImg, outImgCorrected ] = createSimpleStitch( pixArray,SIFT_thresh,
         [f,d] = vl_sift(I1) ;
         I2 = single(rgb2gray(I2)) ;
         [f2,d2] = vl_sift(I2) ;
+        
+%         
+%         figure
+%         imshow(uint8(I1));
+%         figure
+%         imshow(uint8(I2));
+%         display('gray images shown');
 
         [matches, scores] = vl_ubcmatch(d, d2, 2.5) ;
         
@@ -116,12 +130,21 @@ function [ outImg, outImgCorrected ] = createSimpleStitch( pixArray,SIFT_thresh,
         y_disp=y_t;
 
         img3=zeros(size(I1_ori,1),size(I1_ori,2)+size(I2_ori,2)-x_t,3);
-               
+        
+        
+%         display('show I1');
+%         figure
+%         imshow(uint8(I1_ori));
+        
         for i=1:size(I1_ori,1)
             for j=1:size(I1_ori,2)-x_t
                 img3(i,j,:)=I1_ori(i,j,:);  
             end
         end
+        
+%         display('show img3');
+%         figure
+%         imshow(uint8(img3));
         
         I1_sub=zeros(size(I1_ori,1),x_t,3);
         I2_sub=zeros(size(I1_ori,1),x_t,3);
@@ -140,6 +163,13 @@ function [ outImg, outImgCorrected ] = createSimpleStitch( pixArray,SIFT_thresh,
             end
         end  
         
+%         display('show I1_sub');
+%         figure;
+%         imshow(uint8(I1_sub));
+%         display('show I2_sub');
+%         figure;
+%         imshow(uint8(I2_sub));
+                
         oriR=size(I1_sub,1);
         oriC=size(I1_sub,2);
         newR=oriR;
@@ -158,8 +188,29 @@ function [ outImg, outImgCorrected ] = createSimpleStitch( pixArray,SIFT_thresh,
            end
         end
         
+        newR;
+        newC;
+        
         I1_sub2=I1_sub(:,1:15,:);        
         I2_sub2=I2_sub(:,size(I2_sub,2)-14:size(I2_sub,2),:);
+        
+%         figure
+%         imshow(uint8(I1_sub2));
+%         figure
+%         imshow(uint8(I2_sub2));
+        
+        
+        size(I1_sub,1)
+        size(I1_sub,2)
+        size(I1_sub2,1)
+        size(I1_sub2,2)
+        
+        
+        size(I2_sub,1)
+        size(I2_sub,2)
+        size(I2_sub2,1)
+        size(I2_sub2,2)
+        
         
         I1_sub=imresize(I1_sub,[newR newC],'bicubic');
         I2_sub=imresize(I2_sub,[newR newC],'bicubic');
@@ -173,6 +224,12 @@ function [ outImg, outImgCorrected ] = createSimpleStitch( pixArray,SIFT_thresh,
         
         size(pyrImg,1);
         size(pyrImg,2);
+        
+%         display('show p img');
+% %         figure
+% %         imshow(pyrImg);
+%         figure
+%         imshow(uint8(pyrImg));
         
         for i=1:size(I1_ori,1)
             for j=1:size(I1_ori,2)-x_t
@@ -227,7 +284,12 @@ function [ outImg, outImgCorrected ] = createSimpleStitch( pixArray,SIFT_thresh,
                 img3(i+y_plus,j+size(I1_ori,2)-x_t,:)=I2_ori(i,j,:);  
             end
         end
-                
+        
+%         
+%         display('show img3');
+%         figure
+%         imshow(uint8(img3));
+        
         
 % % % % %         for i=1:size(I1_ori,1)
 % % % % %             for j=1:size(I1_ori,2)
@@ -273,7 +335,12 @@ function [ outImg, outImgCorrected ] = createSimpleStitch( pixArray,SIFT_thresh,
         I1=img3;        
     end     
     
-    outImg=I1;      
+    outImg=I1;  
+    
+    row1
+    row2
+    y_disp
+    
     
     if(y_disp<0)
        start= size(I1,1);
@@ -286,6 +353,7 @@ function [ outImg, outImgCorrected ] = createSimpleStitch( pixArray,SIFT_thresh,
     end
     
     for c=col1:size(I1,2)-col1
+       %for r=1:size(I1,1)
        for r=start:step:ending
            w=double(c/(size(I1,2)-2*col1));
            rise = round(double(y_disp*w));

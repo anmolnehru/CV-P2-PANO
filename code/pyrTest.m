@@ -3,18 +3,18 @@ function [ pyrImg, featherImg ] = pyrTest( I1,I2 )
     imga = im2double(I1);
     imgb = im2double(I2); 
     % size(imga) = size(imgb)
-    imga = imresize(imga,[size(imgb,1) size(imgb,2)]);
+    %imga = imresize(imga,[size(imgb,1) size(imgb,2)]);
     [M N ~] = size(imga);
 
     v = 230;
-    level = 5;
+    level = 1;
     limga = genPyr(imga,'lap',level); % the Laplacian pyramid
     limgb = genPyr(imgb,'lap',level);
 
     maska = zeros(size(imga));
     maska(:,1:v,:) = 1;
     maskb = 1-maska;
-    blurh = fspecial('gauss',30,15); % feather the border
+    blurh = fspecial('gauss',2,1); % feather the border
     maska = imfilter(maska,blurh,'replicate');
     maskb = imfilter(maskb,blurh,'replicate');
 
@@ -27,11 +27,11 @@ function [ pyrImg, featherImg ] = pyrTest( I1,I2 )
     end
     imgo = pyrReconstruct(limgo);
     %figure,imshow(imgo) % blend by pyramid
-    imgo1 = maska.*imga+maskb.*imgb;
+    %imgo1 = maska.*imga+maskb.*imgb;
     %figure,imshow(imgo1) % blend by feathering
         
     pyrImg=imgo;
-    featherImg=imgo1;
+    featherImg=imgo;
 
 end
 
